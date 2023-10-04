@@ -26,3 +26,4 @@
 * **Deadline**- Unit test- 17th Oct
 * Extra 3 days to check compatibility 
 * Next meeting on 4th Oct at 6:30 PM
+* Branch Naming Convention: {firstname}
