@@ -27,3 +27,32 @@
 * Extra 3 days to check compatibility 
 * Next meeting on 4th Oct at 6:30 PM
 * Branch Naming Convention: {firstname}
+
+
+## Oct 4, 2023
+* **Recorded by:** Gurleen Wahla  
+* **Notes submiited on:** Oct 4, 2023  
+* **SCRUM master:** Saurav
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 6:30 PM - 7:00 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+### Agenda for the meeting
+* Discuss Assignment 1
+* Discussed further about the delegated tasks
+
+### Baasil
+* Planing on using Shelve for data storing
+
+### Gurleen
+* Object oriented approach
+* Using Bottle for the Server
+
+### Saurav
+* Session management
+* Security
+* Object oriented
+* Log in info, authentication
+
+### Next meeting is on Oct 8th Sunday at 9:30 PM
