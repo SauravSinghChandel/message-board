@@ -56,3 +56,22 @@
 * Log in info, authentication
 
 ### Next meeting is on Oct 8th Sunday at 9:30 PM
+
+## Oct 8, 2023
+
+### Overview
+* Fetch data from database -> Server route -> HTML -> Shows on template
+
+### Cameron and Gurleen 
+* Show 2 pages - Login Page/Sign up page, And User home(First page user gets sent to)
+
+### Saurav 
+* User Authentication
+* 3 routes for - 
+  * Login
+  * Sign up
+  * Home page
+
+### Baasil
+* SQL Database 
+* User ID, Password, User Name
