@@ -58,6 +58,13 @@
 ### Next meeting is on Oct 8th Sunday at 9:30 PM
 
 ## Oct 8, 2023
+* **Recorded by:** Gurleen Wahla  
+* **Notes submiited on:** Oct 8, 2023  
+* **SCRUM master:** Saurav
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 9:30 - 10:00 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
 
 ### Overview
 * Fetch data from database -> Server route -> HTML -> Shows on template
@@ -75,3 +82,42 @@
 ### Baasil
 * SQL Database 
 * User ID, Password, User Name
+
+Next meeting on Friday 13th Oct at 8:30 PM
+
+## Oct 13, 2023
+* **Recorded by:** Gurleen Wahla  
+* **Notes submiited on:** Oct 3, 2023  
+* **SCRUM master:** Saurav
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 8:30 - 9:00 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Absent (Cameron)
+
+### Saurav
+* Sign in Page
+* Session management - Peaker library
+
+### Baasil
+* Will upload database file
+* Basic methods - add, remove, delete
+* Add arguments - User ID, Password, User name
+* New table, Messages (Date and time)
+* Foreign Key - new database
+* Limit of entries
+
+### Rishi
+* Show some forums
+* Home page with submit box
+* Back-end code
+
+### Gurleen
+* Making the signin page and login for the server
+
+
+
+* Monday is the deadline for submission
+* 2 days for the test, Passing test
+* Make seperate files
+
+Next Meeting on Monday 8:30 PM
