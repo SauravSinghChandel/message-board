@@ -1,7 +1,7 @@
 # Meeting Notes
 
 ## Oct 3, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Gurleen   
 * **Notes submiited on:** Oct 3, 2023  
 * **SCRUM master:** Saurav
 * **Venue:** Discord 
@@ -30,9 +30,9 @@
 
 
 ## Oct 4, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Saurav
 * **Notes submiited on:** Oct 4, 2023  
-* **SCRUM master:** Saurav
+* **SCRUM master:** Gurleen 
 * **Venue:** Discord 
 * **Source:** assignment1.md  
 * **Time:** 6:30 PM - 7:00 PM  
@@ -58,9 +58,9 @@
 ### Next meeting is on Oct 8th Sunday at 9:30 PM
 
 ## Oct 8, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Baasil 
 * **Notes submiited on:** Oct 8, 2023  
-* **SCRUM master:** Saurav
+* **SCRUM master:** Rishi
 * **Venue:** Discord 
 * **Source:** assignment1.md  
 * **Time:** 9:30 - 10:00 PM  
@@ -86,9 +86,9 @@
 Next meeting on Friday 13th Oct at 8:30 PM
 
 ## Oct 13, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Rishi
 * **Notes submiited on:** Oct 3, 2023  
-* **SCRUM master:** Saurav
+* **SCRUM master:** Baasil
 * **Venue:** Discord 
 * **Source:** assignment1.md  
 * **Time:** 8:30 - 9:00 PM  
@@ -115,9 +115,27 @@ Next meeting on Friday 13th Oct at 8:30 PM
 * Making the signin page and login for the server
 
 
-
 * Monday is the deadline for submission
 * 2 days for the test, Passing test
 * Make seperate files
 
-Next Meeting on Monday 8:30 PM
+Next Meeting on Monday 8:00 PM
+
+## Oct 13, 2023
+* **Recorded by:** Gurleen
+* **Notes submiited on:** Oct 3, 2023  
+* **SCRUM master:** Cameron
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 8:00 - 8:33 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+
+* Discussed Evaluation
+* 19th performance and code reviews
+* User stories added to board backlog
+* Performance review discussed
+* 18th Unit test and code should be working
+* Next meeting on will be on Wednesday 18th Oct at 8:00 PM
+
+
