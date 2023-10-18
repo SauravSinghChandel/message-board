@@ -60,9 +60,6 @@ home_template = """<!DOCTYPE html>
         <div id="user-info">
             User Name
         </div>
-        <form method="post" action="/logout">
-            <input type="submit" value="Log Out">
-        </form>
         <h2>Create a Post</h2>
         <form id="post-form" method="post" action="/post">
             <textarea id="post-box" name="post" rows="4" cols="50" placeholder="What's on your mind?"></textarea>
@@ -80,3 +77,7 @@ home_template = """<!DOCTYPE html>
     </div>
 </body>
 </html>"""
+
+
+def return_template():
+    return home_template

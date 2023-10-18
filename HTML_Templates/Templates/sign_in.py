@@ -65,6 +65,12 @@ sign_in_template = """<!DOCTYPE html>
 
             <input type="submit" value="Sign Up">
         </form>
+        <form method="post" action="/login">
+            <input type="submit" value="Log In">
+        </form>
     </div>
 </body>
 </html>"""
+
+def return_template():
+    return sign_in_template

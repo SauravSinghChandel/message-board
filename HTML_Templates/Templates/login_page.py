@@ -66,3 +66,7 @@ html_template = """
     </div>
 </body>
 </html>"""
+
+
+def return_template():
+    return login_template
