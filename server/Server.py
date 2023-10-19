@@ -1,37 +1,34 @@
 import bottle
 from bottle import Bottle, route, request, template, redirect, response
 from database_handler import DataBaseHandler
+from beaker.middleware import SessionMiddleware
+from ..HTML_Templates.Templates import *
+from ..user_logic import *
 
 hostName = "localhost"
 serverPort = 8090
 
 app = Bottle()
 
-class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-        self.app = Bottle()
-        self.db_handler = DataBaseHandler()
+session_opts = {
+        'session.cookie_expires': True
+}
 
-    @app.route('/')
-    def login(self):
-        return template('login')
+app = SessionMiddleware(app, session_opts)
 
-    @app.route('/login', method='POST')
-    def do_login(self):
-        username = request.forms.get('username')
-        password = request.forms.get('password')
+@app.route('/login', method="GET"):
+def login_page():
+    return login.login_page()
 
-        # Check if the user exists
-        user_info = db_handler.lookUpUserName(username)
-        if user_info and user_info[2] == password:
-            response.set_cookie('user', username)
-            return redirect('/home')
-        else:
-            return "Login failed. Invalid username or password."
+@app.route('/login', method='POST')
+def do_login():
+    session = request.environ.get('beaker.session')
+    return login.do_login(session)           
+
 
     @app.route('/signup', method='POST')
+
+
     def do_signup(self):
         username = request.forms.get('username')
         password = request.forms.get('password')

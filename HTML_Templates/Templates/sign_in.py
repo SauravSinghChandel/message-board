@@ -66,7 +66,7 @@ sign_in_template = """<!DOCTYPE html>
             <input type="submit" value="Sign Up">
         </form>
         <form method="post" action="/login">
-            <input type="submit" value="Log In">
+            <input type="submit" value="Already a user? Log In">
         </form>
     </div>
 </body>

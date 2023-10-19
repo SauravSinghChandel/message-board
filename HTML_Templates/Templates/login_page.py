@@ -54,7 +54,7 @@ html_template = """
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form method="post" action="/login">
+        <form method="POST" action="/login">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
 
