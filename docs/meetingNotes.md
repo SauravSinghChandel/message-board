@@ -46,7 +46,7 @@
 * Planing on using Shelve for data storing
 
 ### Gurleen
-* Object oriented approach
+* Using app=bottle()
 * Using Bottle for the Server
 
 ### Saurav
@@ -121,7 +121,7 @@ Next meeting on Friday 13th Oct at 8:30 PM
 
 Next Meeting on Monday 8:00 PM
 
-## Oct 13, 2023
+## Oct 16, 2023
 * **Recorded by:** Gurleen
 * **Notes submiited on:** Oct 3, 2023  
 * **SCRUM master:** Cameron
@@ -130,12 +130,35 @@ Next Meeting on Monday 8:00 PM
 * **Time:** 8:00 - 8:33 PM  
 * **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
 
-
 * Discussed Evaluation
 * 19th performance and code reviews
 * User stories added to board backlog
 * Performance review discussed
 * 18th Unit test and code should be working
 * Next meeting on will be on Wednesday 18th Oct at 8:00 PM
+
+## Oct 18, 2023
+* **Recorded by:** Gurleen
+* **Notes submiited on:** Oct 3, 2023  
+* **SCRUM master:** Saurav
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 8:30 - 9:30 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+### Agenda for the meeting 
+* Merging the code in the main branch
+
+### Baasil
+* Can call functions directly
+
+### Gurleen
+* Import function from user_logic file
+* signup and do login in the server code
+* comment out the other code
+* login, logout, signup, index 
+
+
+
 
 
