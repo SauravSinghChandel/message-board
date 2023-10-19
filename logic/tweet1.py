@@ -1,4 +1,5 @@
 import tkinter as tk
+import sqlite3
 
 def send_message():
     username = username_entry.get()
@@ -8,6 +9,19 @@ def send_message():
         chat_display.insert(tk.END, message_text + "\n")
         username_entry.delete(0, tk.END)
         message_entry.delete(0, tk.END)
+        # Save the message to the database here (not shown in this code)
+
+def show_messages():
+    # Retrieve messages from the database and display them
+    conn = sqlite3.connect("chat.db")  # Replace with your database connection
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM messages")
+    messages = cursor.fetchall()
+    for message in messages:
+        username, text = message
+        message_text = f"{username}: {text}"
+        chat_display.insert(tk.END, message_text + "\n")
+    conn.close()
 
 app = tk.Tk()
 app.title("Twitter-like Chat")
@@ -32,5 +46,7 @@ message_entry.pack()
 
 send_button = tk.Button(chat_frame, text="Tweet", command=send_message)
 send_button.pack()
+
+show_messages()  # Display messages when the chat window is opened
 
 app.mainloop()
