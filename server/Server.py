@@ -23,40 +23,32 @@ def login_page():
 @app.route('/login', method='POST')
 def do_login():
     session = request.environ.get('beaker.session')
-    return login.do_login(session)           
+    return login.do_login(session)
+
+@app.route('/signup', method='GET')
+def signup_page():
+    return signin.signup_page()
+
+@app.route('/signup', method='POST')
+def signup():
+    session = request.environ.get('beaker.session')
+    return signin.signup(session)
+
+@app.route('/home')
+def home():
+    session = request.environ.get('beaker.session')
+    return index.home(session)
+
+@app.route('/logout')
+def logout():
+    session = request.environ.get('beaker.session')
+    return logout.logout(session)
 
 
-    @app.route('/signup', method='POST')
-
-
-    def do_signup(self):
-        username = request.forms.get('username')
-        password = request.forms.get('password')
-
-        result = db_handler.add((username, password))
-        if result is not None:
-            return result
-        else:
-            response.set_cookie('user', username)
-            return redirect('/home')
-
-    @app.route('/home')
-    def home(self):
-        username = request.get_cookie('user')
-        if username:
-            return f"Hello, {username}! Welcome to the home page."
-        else:
-            return redirect('/')
-
-    @app.route('/logout')
-    def logout(self):
-        bottle.response.delete_cookie('user')
-        return redirect('/')
-
-    @app.route('/static/<filename>')
-    def server_static(self, filename):
-        return bottle.static_file(filename, root='./static/')
-
+'''@app.route('/static/<filename>')
+def server_static(self, filename):
+    return bottle.static_file(filename, root='./static/')
+'''
 
 if __name__ == '__main__':
-    bottle.run(app, host='localhost', port=8080)
+    bottle.run(app, host='localhost', port=8090)
