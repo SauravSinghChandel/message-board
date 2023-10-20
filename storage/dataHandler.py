@@ -27,10 +27,22 @@ class dataBaseHandler:
         self._messageItems = []
 
     def __len__(self):
-        return len(self._userItems)
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM users")
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return len(item)
 
     def __iter__(self):
-        return iter(self._userItems)
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM users")
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return iter(item)
 
     def addUser(self, new_item):
         self._userItems.append(new_item)
@@ -44,7 +56,7 @@ class dataBaseHandler:
         """Return the matching item"""
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute(f"SELECT * from users WHERE user_ID = (?)", (key))
+        c.execute(f"SELECT * from users WHERE user_ID = (?)", (key,))
         item = c.fetchall()
         conn.commit()
         conn.close()
@@ -62,13 +74,16 @@ class dataBaseHandler:
 
     def removeUser(self, key):
         """Remove a record"""
-        conn = sqlite3.connect('APP.db')
-        c = conn.cursor()
-        c.execute(f"DELETE from users WHERE user_ID = (?)", (key))
-        item = c.fetchall()
-        conn.commit()
-        conn.close()
-        return item
+        try:
+            conn = sqlite3.connect('APP.db')
+            c = conn.cursor()
+            c.execute(f"DELETE from users WHERE user_ID = (?)", (key,))
+            item = c.fetchall()
+            conn.commit()
+            conn.close()
+            return item
+        except IndexError:
+            print("Not present in Database.")
 
     def deleteTableUsers(self):
         """Delete the table"""
@@ -122,13 +137,16 @@ class dataBaseHandler:
 
     def deleteMessage(self, userName, messageID):
         """Remove a record"""
-        conn = sqlite3.connect('APP.db')
-        c = conn.cursor()
-        c.execute("DELETE from messages WHERE user_ID = (?) AND message_ID = (?)", (userName, messageID))
-        item = c.fetchall()
-        conn.commit()
-        conn.close()
-        return item
+        try:
+            conn = sqlite3.connect('APP.db')
+            c = conn.cursor()
+            c.execute("DELETE from messages WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+            item = c.fetchall()
+            conn.commit()
+            conn.close()
+            return item
+        except IndexError:
+            print("Does not exist")
 
     def deleteTableMessages(self):
         """Delete the table"""
