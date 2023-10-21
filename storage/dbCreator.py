@@ -45,5 +45,11 @@ MESSAGES:
 # print(newHandle.lookUpuserMessages('JamesBond'))
 # print(newHandle.lookUpSpecificMessage('JamesBond', '1'))
 
-
+print(newHandle.displayTableUsers())
+print(newHandle.displayTableUsers())
+newHandle.removeUser("10")
+print(newHandle.displayTableUsers())
+newHandle.removeUser("11")
+print(newHandle.displayTableUsers())
+print(newHandle.displayTableMessages())
 
