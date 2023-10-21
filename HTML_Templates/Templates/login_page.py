@@ -1,4 +1,4 @@
-html_template = """
+login_template = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +49,26 @@ html_template = """
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        /* Style the "Login" and "Sign Up" buttons */
+        .action-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Create a container for buttons and set horizontal layout */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -63,9 +83,17 @@ html_template = """
 
             <input type="submit" value="Login">
         </form>
+
+        <!-- Create a container for buttons and set horizontal layout -->
+        <div class="button-container">
+            <br> First time user? Sign up!
+
+            <input class="action-button" type="button" value="Sign Up" onclick="location.href='/signup';">
+        </div>
     </div>
 </body>
-</html>"""
+</html>
+"""
 
 
 def return_template():

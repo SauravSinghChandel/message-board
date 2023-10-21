@@ -1,22 +1,26 @@
 import bottle
-from bottle import Bottle, route, request, template, redirect, response
-from database_handler import DataBaseHandler
+from bottle import Bottle, route, request, response
+from storage import dataHandler
 from beaker.middleware import SessionMiddleware
-from ..HTML_Templates.Templates import *
-from ..user_logic import *
+from logic import post
+from user_logic import login, session_check, signin
+import sys
 
+sys.path.append("..")
 hostName = "localhost"
 serverPort = 8090
 
 app = Bottle()
 
 session_opts = {
-        'session.cookie_expires': True
+    'session.type': 'file',
+    'session.cookie_expires': True,
+    'session.data_dir': './session_data',
+    'session.auto': True
 }
 
-app = SessionMiddleware(app, session_opts)
 
-@app.route('/login', method="GET"):
+@app.route('/login', method="GET")
 def login_page():
     return login.login_page()
 
@@ -34,21 +38,22 @@ def signup():
     session = request.environ.get('beaker.session')
     return signin.signup(session)
 
-@app.route('/home')
+@app.route('/')
 def home():
     session = request.environ.get('beaker.session')
-    return index.home(session)
+    return session_check.index(session)
 
 @app.route('/logout')
 def logout():
     session = request.environ.get('beaker.session')
-    return logout.logout(session)
+    return login.logout(session)
 
+@app.route('/post', method="POST")
+def add_post():
+    session = request.environ.get('beaker.session')
+    return post.make_post(session)
 
-'''@app.route('/static/<filename>')
-def server_static(self, filename):
-    return bottle.static_file(filename, root='./static/')
-'''
+app = SessionMiddleware(app, session_opts)
 
-if __name__ == '__main__':
+def run():
     bottle.run(app, host='localhost', port=8090)

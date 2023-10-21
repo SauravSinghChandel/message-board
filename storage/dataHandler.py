@@ -44,7 +44,7 @@ class dataBaseHandler:
         """Return the matching item"""
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute(f"SELECT * from users WHERE user_ID = (?)", (key))
+        c.execute(f"SELECT * from users WHERE user_ID = (?)", (key, ))
         item = c.fetchall()
         conn.commit()
         conn.close()
@@ -64,7 +64,7 @@ class dataBaseHandler:
         """Remove a record"""
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute(f"DELETE from users WHERE user_ID = (?)", (key))
+        c.execute(f"DELETE from users WHERE user_ID = (?)", (key, ))
         item = c.fetchall()
         conn.commit()
         conn.close()
@@ -138,11 +138,11 @@ class dataBaseHandler:
         conn.commit()
         conn.close()
 
-    def displayTableMessages(self):
+    def displayTableMessages(self, n):
         """Display the table"""
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * FROM messages")
+        c.execute("SELECT * FROM messages LIMIT ?", (n, ))
         item = c.fetchall()
         conn.commit()
         conn.close()
