@@ -33,7 +33,7 @@ No major deviations from the architecture given in class were made.
 
 There is a directory that contains performance reviews and user stories and features done by each person in the docs folder.
 The project files done by each person are stored in individual folders. Details about the task, folders
-and individual branches are given in the follwing table below.
+and individual branches are given in the following table below.
 
 ### Task assignment Details
 
@@ -49,14 +49,14 @@ and individual branches are given in the follwing table below.
 
 ### HTML_Templates
 ##### Contains:
-- Templates/ - Contains home_page.py, login_page.py and sign_in.py which   ***FILL HERE***
+- Templates/ - Contains home_page.py, login_page.py and sign_in.py which manipulates html code and returns them as templates
 
 ### logic
 ##### Contains:
-- tweet1.py - Contains the logic for post interaction. ***FILL HERE***
+- post.py Handles the post fetching, adding and display logic
 ### server
 ##### Contains:
-- Server.py - Contains the implementation for the server ***FILL HERE***
+- Server.py - Contains the implementation for the server runs server and maintains routes
 - serverData
 ### storage
 ##### Contains:
@@ -68,9 +68,8 @@ and individual branches are given in the follwing table below.
 - attributions.md - The attributions file.
 ### user_logic
 ##### Contains:
-- authentication/ - Contains login.py, signin.py, testserver.py which   ***FILL HERE***
-- login.py - 
-- session_check.py - 
-- signin.py - 
+- login.py - login logic and password userr verification (Note: This is not working due to some changes in encryption logic, marker is requested to please use sign in button)
+- session_check.py - checks if the user is logged in
+- signin.py - adds user to the database and verifies their username
 
 
