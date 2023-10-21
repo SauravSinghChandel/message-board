@@ -1,11 +1,11 @@
 # Term Project - Team J
 ***
 ## Project Status 
-Most of the functionality working.  ***FILL HERE***
+User can signup and create an account. Make a post and see recent posts. Login functionality is temporarily down due to password hashing bug.
 ## Project details
 ### Starting the app 
 
-Running the main.py file should get the app started. ***FILL HERE***
+Running the main.py file should get the app started.
 ### The Docs folder
 ##### Contains: 
 - performance_reviews/ - Contains all the performance reviews done by everyone.
