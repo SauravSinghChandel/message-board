@@ -1,7 +1,9 @@
 from bottle import request, redirect
-from ..storage import dataHandler
-from ..HTML_Templates.Templates import *
+from storage import dataHandler as dH
+from HTML_Templates.Templates import login_page as lp
 import hashlib
+
+dataHandler = dH.dataBaseHandler()
 
 
 def verify_password(stored_password, provided_password):
@@ -17,14 +19,17 @@ def verify_password(stored_password, provided_password):
 
 
 def login_page():
-    return login_page.return_template()
+    return lp.return_template()
+
 
 def login(username, password):
 
-    user_details = dataHandler.lookupUserName(username)
-
-    if username == user_details[1] and verify_password(password, user_details[2]):
-        return True
+    user_details = dataHandler.lookUpUserName(username)
+    if len(user_details) == 1:
+        user_details = list(user_details[0])
+        if username == user_details[1] and verify_password(password, user_details[2]):
+            print('true')
+            return True
 
     return False
 
@@ -32,7 +37,6 @@ def login(username, password):
 def do_login(session_data):
     username = request.forms.get('username')
     password = request.forms.get('password')
-
     if login(username, password):
         session_data['user'] == username
         redirect('/')

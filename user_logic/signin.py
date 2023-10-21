@@ -1,11 +1,12 @@
-from bottle import request
-from ..HTML_Templates.Templates import *
-from ..storage import dataHandler
+from bottle import request, redirect
+from HTML_Templates.Templates import sign_in_page
+from storage import dataHandler as dH
 import secrets
 import string
 import hashlib
 import os
 
+dataHandler = dH.dataBaseHandler()
 
 def encrypt_password(password, salt=None):
     if salt is None:
@@ -22,9 +23,9 @@ def encrypt_password(password, salt=None):
 
 def is_user_id_unique(user_id):
 
-    user_details = dataHandler.lookupUserID(user_id)
+    user_details = dataHandler.lookUpUserID(user_id)
 
-    if user_details == ():
+    if len(user_details) == 0:
         return True
 
     return False
@@ -41,7 +42,7 @@ def generate_unique_user_id(length=12):
 
 
 def username_available(username):
-    user_details = dataHandler.lookupUserName(username)
+    user_details = dataHandler.lookUpUserName(username)
     if len(user_details) == 0:
         return True
 
@@ -56,25 +57,26 @@ def save_user(username, password):
 
 
 def signup_page():
-    return sign_in.return_template()
+    return sign_in_page.return_template()
 
 
 def signup(session_data):
     username = request.forms.get('username')
     password = request.forms.get('password')
     retype_password = request.forms.get('retype-password')
-
+    print('1')
     # Check if the password and retype_password match
     if password != retype_password:
         return "Password and retype password do not match. <a href='/signup'>Try again</a>"
-
+    print('2')
     # Check if the username is already in use
-    if username_available(username):
+    if not username_available(username):
         return "Username already in use. <a href='/signup'>Try a different username</a>"
-
+    print(3)
     # Create the user
     save_user(username, password)
-
+    print('4')
     # Set the user in the session
     session_data['user'] = username
+    print(5)
     redirect('/')

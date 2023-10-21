@@ -1,8 +1,8 @@
-from HTML_Templates.Templates import *
+from HTML_Templates.Templates import home_page, login_page
 
 
 def index(session_data):
     if 'user' in session_data:
-        return home_template.return_template()
+        return home_page.return_template()
     else:
-        return login.return_template()
+        return login_page.return_template()

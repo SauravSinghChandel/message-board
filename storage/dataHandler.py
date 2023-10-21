@@ -68,7 +68,9 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute(f"SELECT * from users WHERE user_ID = (?)", (key,))
+
+        c.execute(f"SELECT * from users WHERE user_ID = (?)", (key, ))
+
         item = c.fetchall()
         conn.commit()
         conn.close()
@@ -104,6 +106,7 @@ class dataBaseHandler:
             return item
         except IndexError:
             print("Not present in Database.")
+
 
     def deleteTableUsers(self):
         """
@@ -204,14 +207,16 @@ class dataBaseHandler:
         conn.commit()
         conn.close()
 
-    def displayTableMessages(self):
+
+    def displayTableMessages(self, n):
+        """Display the table"""
         """
         Displays all the messages
         :return: null
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * FROM messages")
+        c.execute("SELECT * FROM messages LIMIT ?", (n, ))
         item = c.fetchall()
         conn.commit()
         conn.close()
