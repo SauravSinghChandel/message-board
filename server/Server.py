@@ -24,24 +24,39 @@ session_opts = {
 def login_page():
     return login.login_page()
 
+'''Calling login_page function from user_logic, authenication login.py
+Using GET method here.'''
+
 @app.route('/login', method='POST')
 def do_login():
     session = request.environ.get('beaker.session')
     return login.do_login(session)
 
+'''Calling do_login function from user_logic, authenication login.py
+Using POST method here and passing a session ID'''
+
 @app.route('/signup', method='GET')
 def signup_page():
     return signin.signup_page()
+
+'''Calling signin function from user_logic, authenication signin.py
+Using GET method here.'''
 
 @app.route('/signup', method='POST')
 def signup():
     session = request.environ.get('beaker.session')
     return signin.signup(session)
 
+
+'''Calling signin function from user_logic, authenication signin.py
+Using POST method here and passing a session ID'''
 @app.route('/')
 def home():
     session = request.environ.get('beaker.session')
     return session_check.index(session)
+
+'''Calling home function from user_logic, authenication session_check.py
+passing a session ID'''
 
 @app.route('/logout')
 def logout():
@@ -54,6 +69,7 @@ def add_post():
     return post.make_post(session)
 
 app = SessionMiddleware(app, session_opts)
+
 
 def run():
     bottle.run(app, host='localhost', port=8090)
