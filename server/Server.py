@@ -16,39 +16,51 @@ session_opts = {
 
 app = SessionMiddleware(app, session_opts)
 
-@app.route('/login', method="GET"):
+@app.route('/login', method="GET")
 def login_page():
     return login.login_page()
+
+'''Calling login_page function from user_logic, authenication login.py
+Using GET method here.'''
 
 @app.route('/login', method='POST')
 def do_login():
     session = request.environ.get('beaker.session')
     return login.do_login(session)
 
+'''Calling do_login function from user_logic, authenication login.py
+Using POST method here and passing a session ID'''
+
 @app.route('/signup', method='GET')
 def signup_page():
     return signin.signup_page()
+
+'''Calling signin function from user_logic, authenication signin.py
+Using GET method here.'''
 
 @app.route('/signup', method='POST')
 def signup():
     session = request.environ.get('beaker.session')
     return signin.signup(session)
 
+'''Calling signin function from user_logic, authenication signin.py
+Using POST method here and passing a session ID'''
+
 @app.route('/home')
 def home():
     session = request.environ.get('beaker.session')
     return index.home(session)
+
+'''Calling home function from user_logic, authenication session_check.py
+passing a session ID'''
 
 @app.route('/logout')
 def logout():
     session = request.environ.get('beaker.session')
     return logout.logout(session)
 
-
-'''@app.route('/static/<filename>')
-def server_static(self, filename):
-    return bottle.static_file(filename, root='./static/')
-'''
+'''Calling home function from user_logic, authenication login.py
+passing a session ID'''
 
 if __name__ == '__main__':
     bottle.run(app, host='localhost', port=8090)
