@@ -138,7 +138,7 @@ Next Meeting on Monday 8:00 PM
 * Next meeting on will be on Wednesday 18th Oct at 8:00 PM
 
 ## Oct 18, 2023
-* **Recorded by:** Gurleen
+* **Recorded by:** Cameron
 * **Notes submiited on:** Oct 3, 2023  
 * **SCRUM master:** Saurav
 * **Venue:** Discord 
