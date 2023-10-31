@@ -184,9 +184,10 @@ Next Meeting on Monday 8:00 PM
 ### Agenda for the meeting 
 *  Issuing tasks for everyone
 
-implementing a rating/review function for users
 
-a feature for automatic aggregation of rating reviews and/or a qualitative/quantitative analysis 
+### Important Points
+* implementing a rating/review function for users
+* a feature for automatic aggregation of rating reviews and/or a qualitative/quantitative analysis 
 
 ### Baasil
 * Partial searching for users and messages
