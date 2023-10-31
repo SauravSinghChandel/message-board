@@ -172,7 +172,32 @@ Next Meeting on Monday 8:00 PM
 * comment out the other code
 * login, logout, signup, index 
 
+## Oct 18, 2023
+* **Recorded by:** Rishi
+* **Notes submiited on:** Oct 30, 2023  
+* **SCRUM master:** Saurav
+* **Venue:** Discord 
+* **Source:** assignment2.md  
+* **Time:** 9:00 - 9:30 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
 
+### Agenda for the meeting 
+*  Issuing tasks for everyone
 
+implementing a rating/review function for users
 
+a feature for automatic aggregation of rating reviews and/or a qualitative/quantitative analysis 
 
+### Baasil
+* Partial searching for users and messages
+
+### Gurleen
+* Need to make a post and search request to call the appropriate function
+
+### Saurav
+* Do additional two features from user stories, possibly likes and dislikes
+
+### Rishi
+* need to make another method for search, a method that calls fetched data from database and updates it, function to aggregate everything, take the array and average it and post it
+
+Next Meeting 6pm Oct 31st
