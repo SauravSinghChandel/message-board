@@ -45,11 +45,18 @@ MESSAGES:
 # print(newHandle.lookUpuserMessages('JamesBond'))
 # print(newHandle.lookUpSpecificMessage('JamesBond', '1'))
 
+# print(newHandle.displayTableUsers())
+# print(newHandle.displayTableUsers())
+# newHandle.removeUser("10")
+# print(newHandle.displayTableUsers())
+# newHandle.removeUser("11")
+print("Users Entries:")
 print(newHandle.displayTableUsers())
-print(newHandle.displayTableUsers())
-newHandle.removeUser("10")
-print(newHandle.displayTableUsers())
-newHandle.removeUser("11")
-print(newHandle.displayTableUsers())
+print("Message Table Entries:")
 print(newHandle.displayTableMessages())
+print("Ratings Data:")
+print(newHandle.displayTableMessageRatings())
+print("Search Data:")
+print(newHandle.lookUpSpecificSubstring("StIrReD"))
+
 
