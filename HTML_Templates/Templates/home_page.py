@@ -73,6 +73,17 @@ def return_template():
                                 <div id="user-info">
                                     User Name
                                 </div>
+                                <div id="search">
+                                    <input type="text" class="searchBar" placeholder="Search...">
+                                    <button type="submit" class="search_button" method="POST">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                                <div id="dark_mode">
+                                    <form method="POST" action="/dark">
+                                        <input type="submit" value="Dark">
+                                    </form>
+                                </div>
                                 <h2>Create a Post</h2>
                                 <form id="post-form" method="post" action="/post">
                                     <textarea id="post-box" name="post" rows="4" cols="50" placeholder="What's on your mind?"></textarea>
@@ -83,6 +94,8 @@ def return_template():
                                     <ul>
                                         {}
                                     </ul>
+                                    
+                            
                             </div>
                         </body>
                         </html>""".format(''.join(['<div class="post-box"><p>{}</p></div>'.format(post) for post in recent_posts]))
