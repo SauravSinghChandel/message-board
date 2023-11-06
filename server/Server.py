@@ -92,11 +92,11 @@ def search():
         return "User not found."
 
 @app.route('/search', method="POST")
-def search():
+def ratings():
     pass
 
 @app.route('/search', method="GET")
-def search():
+def ratings():
     pass
 
 app = SessionMiddleware(app, session_opts)
