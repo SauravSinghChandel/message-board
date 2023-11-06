@@ -1,7 +1,7 @@
 # Meeting Notes
 
 ## Oct 3, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Gurleen   
 * **Notes submiited on:** Oct 3, 2023  
 * **SCRUM master:** Saurav
 * **Venue:** Discord 
@@ -30,9 +30,9 @@
 
 
 ## Oct 4, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Saurav
 * **Notes submiited on:** Oct 4, 2023  
-* **SCRUM master:** Saurav
+* **SCRUM master:** Gurleen 
 * **Venue:** Discord 
 * **Source:** assignment1.md  
 * **Time:** 6:30 PM - 7:00 PM  
@@ -46,7 +46,7 @@
 * Planing on using Shelve for data storing
 
 ### Gurleen
-* Object oriented approach
+* Using app=bottle()
 * Using Bottle for the Server
 
 ### Saurav
@@ -58,13 +58,18 @@
 ### Next meeting is on Oct 8th Sunday at 9:30 PM
 
 ## Oct 8, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Baasil 
 * **Notes submiited on:** Oct 8, 2023  
-* **SCRUM master:** Saurav
+* **SCRUM master:** Rishi
 * **Venue:** Discord 
 * **Source:** assignment1.md  
 * **Time:** 9:30 - 10:00 PM  
 * **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+### Agenda for this meeting
+* Set release cycle 1 schedule for final pull-requests
+* Draft the software process for the project, review the progress on defining service and module interfaces.
+
 
 ### Overview
 * Fetch data from database -> Server route -> HTML -> Shows on template
@@ -86,13 +91,17 @@
 Next meeting on Friday 13th Oct at 8:30 PM
 
 ## Oct 13, 2023
-* **Recorded by:** Gurleen Wahla  
+* **Recorded by:** Rishi
 * **Notes submiited on:** Oct 3, 2023  
-* **SCRUM master:** Saurav
+* **SCRUM master:** Baasil
 * **Venue:** Discord 
 * **Source:** assignment1.md  
 * **Time:** 8:30 - 9:00 PM  
 * **Attendance:** Gurleen, Baasil, Saurav, Rishi, Absent (Cameron)
+
+### Agenda for the meeting 
+* Discuss user stories timeline and placement in the repo
+
 
 ### Saurav
 * Sign in Page
@@ -115,9 +124,81 @@ Next meeting on Friday 13th Oct at 8:30 PM
 * Making the signin page and login for the server
 
 
-
 * Monday is the deadline for submission
 * 2 days for the test, Passing test
 * Make seperate files
 
-Next Meeting on Monday 8:30 PM
+Next Meeting on Monday 8:00 PM
+
+## Oct 16, 2023
+* **Recorded by:** Gurleen
+* **Notes submiited on:** Oct 3, 2023  
+* **SCRUM master:** Cameron
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 8:00 - 8:33 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+### Agenda for the meeting 
+* Discussing performance reviews
+* Discuss progress on sprint 1 deliverables and code implementation status.
+
+### Important points
+* Discussed Evaluation
+* 19th performance and code reviews
+* User stories added to board backlog
+* Performance review discussed
+* 18th Unit test and code should be working
+* Next meeting on will be on Wednesday 18th Oct at 8:00 PM
+
+## Oct 18, 2023
+* **Recorded by:** Cameron
+* **Notes submiited on:** Oct 3, 2023  
+* **SCRUM master:** Gurleen
+* **Venue:** Discord 
+* **Source:** assignment1.md  
+* **Time:** 8:30 - 9:30 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+### Agenda for the meeting 
+* Merging the code in the main branch
+
+### Baasil
+* Can call functions directly
+
+### Gurleen
+* Import function from user_logic file
+* signup and do login in the server code
+* comment out the other code
+* login, logout, signup, index 
+
+## Oct 18, 2023
+* **Recorded by:** Rishi
+* **Notes submiited on:** Oct 30, 2023  
+* **SCRUM master:** Saurav
+* **Venue:** Discord 
+* **Source:** assignment2.md  
+* **Time:** 9:00 - 9:30 PM  
+* **Attendance:** Gurleen, Baasil, Saurav, Rishi, Cameron
+
+### Agenda for the meeting 
+*  Issuing tasks for everyone
+
+
+### Important Points
+* implementing a rating/review function for users
+* a feature for automatic aggregation of rating reviews and/or a qualitative/quantitative analysis 
+
+### Baasil
+* Partial searching for users and messages
+
+### Gurleen
+* Need to make a post and search request to call the appropriate function
+
+### Saurav
+* Do additional two features from user stories, possibly likes and dislikes
+
+### Rishi
+* need to make another method for search, a method that calls fetched data from database and updates it, function to aggregate everything, take the array and average it and post it
+
+Next Meeting 6pm Oct 31st

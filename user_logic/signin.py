@@ -1,37 +1,69 @@
-from bottle import request
-from ..HTML_Templates.Templates import *
-from ..storage import dataHandler
+from bottle import request, redirect
+from HTML_Templates.Templates import sign_in_page
+from storage import dataHandler as dH
 import secrets
 import string
 import hashlib
 import os
+from cryptography.fernet import Fernet
 
+key = b'2hX8MUwJ_JDcuQTv2YnwsVcP7Bij3Bw_9KTFkvhDiMc='
+fernet = Fernet(key)
+dataHandler = dH.dataBaseHandler()
 
-def encrypt_password(password, salt=None):
-    if salt is None:
-        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+# def encrypt_password(password, salt=None):
+#     """
+#     Encrypt a password using a salt and PBKDF2-HMAC-SHA256.
 
-    password_hash = hashlib.pbkdf2_hmac('sha256', password
-                                        .encode('utf-8'), salt, 100000)
+#     Args:
+#         password (str): The password to be encrypted.
+#         salt (bytes, optional): The salt used for encryption. If not provided, a new random salt is generated.
 
-    salt = salt.hex()
-    password_hash = password_hash.hex()
+#     Returns:
+#         str: The concatenated salt and password hash as a hexadecimal string.
+#     """
 
-    return salt + password_hash
+#     if salt is None:
+#         salt = hashlib.sha256(os.urandom(64)).hexdigest().encode('ascii')
+#         print(salt, len(salt))
+
+#     password_hash = hashlib.pbkdf2_hmac('sha256', password
+#                                         .encode('utf-8'), salt, 100000)
+
+#     salt = salt.hex()
+#     password_hash = password_hash.hex()
+
+#     return salt + password_hash
 
 
 def is_user_id_unique(user_id):
+    """
+    Check if a user ID is unique in the database.
 
-    user_details = dataHandler.lookupUserID(user_id)
+    Args:
+        user_id (str): The user ID to be checked.
 
-    if user_details == ():
+    Returns:
+        bool: True if the user ID is unique; False if it already exists in the database.
+    """
+    user_details = dataHandler.lookUpUserID(user_id)
+
+    if len(user_details) == 0:
         return True
 
     return False
 
 
 def generate_unique_user_id(length=12):
+    """
+    Generate a unique user ID of the specified length.
 
+    Args:
+        length (int, optional): The length of the user ID to be generated. Default is 12.
+
+    Returns:
+        str: A unique user ID.
+    """
     alphabet = string.ascii_letters + string.digits
 
     while True:
@@ -41,7 +73,16 @@ def generate_unique_user_id(length=12):
 
 
 def username_available(username):
-    user_details = dataHandler.lookupUserName(username)
+    """
+    Check if a username is available (not already in use).
+
+    Args:
+        username (str): The username to be checked.
+
+    Returns:
+        bool: True if the username is available; False if it is already in use.
+    """
+    user_details = dataHandler.lookUpUserName(username)
     if len(user_details) == 0:
         return True
 
@@ -49,32 +90,59 @@ def username_available(username):
 
 
 def save_user(username, password):
+    """
+    Save a new user with a unique user ID and an encrypted password.
+
+    Args:
+        username (str): The username of the new user.
+        password (str): The unencrypted password of the new user.
+
+    Returns:
+        None
+    """
     user_id = generate_unique_user_id()
-    password_encrypted = encrypt_password(password)
+    password_encrypted = fernet.encrypt(password.encode())
 
     dataHandler.addUser((user_id, username, password_encrypted))
 
 
 def signup_page():
-    return sign_in.return_template()
+    """
+    Return the HTML template for the sign-up page.
+
+    Returns:
+        str: HTML template for the sign-up page.
+    """
+    return sign_in_page.return_template()
 
 
 def signup(session_data):
+    """
+    Process user sign-up, including password validation, username availability, and user creation.
+
+    Args:
+        session_data (dict): The user's session data for session management.
+
+    Returns:
+        str or None: If sign-up is successful, returns None and redirects to the home page.
+                     If sign-up fails, returns an error message with a link to try again.
+    """
     username = request.forms.get('username')
     password = request.forms.get('password')
     retype_password = request.forms.get('retype-password')
-
+    print('1')
     # Check if the password and retype_password match
     if password != retype_password:
         return "Password and retype password do not match. <a href='/signup'>Try again</a>"
-
+    print('2')
     # Check if the username is already in use
-    if username_available(username):
+    if not username_available(username):
         return "Username already in use. <a href='/signup'>Try a different username</a>"
-
+    print(3)
     # Create the user
     save_user(username, password)
-
+    print('4')
     # Set the user in the session
     session_data['user'] = username
+    print(5)
     redirect('/')

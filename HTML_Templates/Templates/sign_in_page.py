@@ -1,8 +1,7 @@
-login_template = """
-<!DOCTYPE html>
+sign_in_template = """<!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Sign Up</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,52 +48,29 @@ login_template = """
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
-
-        /* Style the "Login" and "Sign Up" buttons */
-        .action-button {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .action-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Create a container for buttons and set horizontal layout */
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
-        <form method="POST" action="/login">
+        <h2>Sign Up</h2>
+        <form method="post" action="/signup">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
 
-            <input type="submit" value="Login">
+            <label for="retype-password">Re-type Password:</label>
+            <input type="password" id="retype-password" name="retype-password" required><br>
+
+            <input type="submit" value="Sign Up">
         </form>
-
-        <!-- Create a container for buttons and set horizontal layout -->
-        <div class="button-container">
-            <br> First time user? Sign up!
-
-            <input class="action-button" type="button" value="Sign Up" onclick="location.href='/signup';">
+        <div>
+        <input class="action-button" type="button" value="Log In" onclick="location.href='/login';">
         </div>
     </div>
 </body>
-</html>
-"""
-
+</html>"""
 
 def return_template():
-    return login_template
+    return sign_in_template

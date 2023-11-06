@@ -1,0 +1,7 @@
+| User Story ID | User Story Description                      | Priority | Acceptance Criteria                                                   |
+|---------------|---------------------------------------------|----------|------------------------------------------------------------------------|
+| US-101        | Letting users upload their own profile pictures and have them visible to other users.                            | Medium     | - I can upload a profile picture, making them viewable to other users.  |
+|               |  |          | - The drafts are stored in a separate database.                      |
+|               |  |   |                                                                 |
+| US-102        | I want to be able to toggle between different viewing settings as a user (Such as light mode, dark mode etc).                                  | Low     | - I can toggle between light mode, dark mode and other viewing settings.                   |
+|               | |          | - I can make it save for each user so they do not have to re-select their preferred settings each time.  |
