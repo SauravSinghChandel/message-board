@@ -1,6 +1,7 @@
 import bottle
 from bottle import Bottle, route, request, response
 from storage import dataHandler
+from dataHandler import *
 from beaker.middleware import SessionMiddleware
 from logic import post
 from user_logic import login, session_check, signin
@@ -68,8 +69,37 @@ def add_post():
     session = request.environ.get('beaker.session')
     return post.make_post(session)
 
-app = SessionMiddleware(app, session_opts)
+'''Looking up the user by username from the database '''
 
+@app.route('/search', method="POST")
+def search():
+    name = request.form['userName']
+    # Use the imported function from dataHandler to look up the user by name
+    user_info = lookUpUserByName(name)
+    if user_info:
+        return f"User found: {user_info}"
+    else:
+        return "User not found."
+
+@app.route('/search', method="GET")
+def search():
+    name = request.form['userName']
+    # Use the imported function from dataHandler to look up the user by name
+    user_info = lookUpUserByName(name)
+    if user_info:
+        return f"User found: {user_info}"
+    else:
+        return "User not found."
+
+@app.route('/search', method="POST")
+def search():
+    pass
+
+@app.route('/search', method="GET")
+def search():
+    pass
+
+app = SessionMiddleware(app, session_opts)
 
 def run():
     bottle.run(app, host='localhost', port=8090)
