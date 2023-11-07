@@ -56,7 +56,12 @@ print("Message Table Entries:")
 print(newHandle.displayTableMessages())
 print("Ratings Data:")
 print(newHandle.displayTableMessageRatings())
+newHandle.updateMessageRating('JamesBond', '1', '7', '7', '7', '7')
+print("Ratings Data:")
+print(newHandle.displayTableMessageRatings())
 print("Search Data:")
 print(newHandle.lookUpSpecificSubstring("StIrReD"))
+print("Specific Rating Data:")
+print(newHandle.getSpecificMessageRatings("twainyMark", "1"))
 
 
