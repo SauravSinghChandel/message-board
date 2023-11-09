@@ -20,43 +20,45 @@ session_opts = {
     'session.auto': True
 }
 
+'''Calling login_page method from user_logic, login.py
+Using GET method here.'''
 
 @app.route('/login', method="GET")
 def login_page():
     return login.login_page()
 
-'''Calling login_page function from user_logic, authenication login.py
-Using GET method here.'''
+'''Calling do_login method from user_logic, login.py
+Using POST method here and passing a session ID'''
 
 @app.route('/login', method='POST')
 def do_login():
     session = request.environ.get('beaker.session')
     return login.do_login(session)
 
-'''Calling do_login function from user_logic, authenication login.py
-Using POST method here and passing a session ID'''
+'''Calling signin method from user_logic, signin.py
+Using GET method here.'''
 
 @app.route('/signup', method='GET')
 def signup_page():
     return signin.signup_page()
 
-'''Calling signin function from user_logic, authenication signin.py
-Using GET method here.'''
+'''Calling signin method from user_logic, signin.py
+Using POST method here and passing a session ID'''
 
 @app.route('/signup', method='POST')
 def signup():
     session = request.environ.get('beaker.session')
     return signin.signup(session)
 
+'''Calling home method from user_logic, session_check.py
+passing a session ID'''
 
-'''Calling signin function from user_logic, authenication signin.py
-Using POST method here and passing a session ID'''
 @app.route('/')
 def home():
     session = request.environ.get('beaker.session')
     return session_check.index(session)
 
-'''Calling home function from user_logic, authenication session_check.py
+'''Calling logout method from user_logic, login.py
 passing a session ID'''
 
 @app.route('/logout')
@@ -64,40 +66,45 @@ def logout():
     session = request.environ.get('beaker.session')
     return login.logout(session)
 
+'''Calling make_post method from logic, post.py
+Using POST method here and passing a session ID'''
+
 @app.route('/post', method="POST")
 def add_post():
     session = request.environ.get('beaker.session')
     return post.make_post(session)
 
-'''Looking up the user by username from the database '''
+'''Calling search_users method from logic, search.py
+Using POST method here and passing a session ID'''
 
 @app.route('/search', method="POST")
 def search():
-    name = request.form['userName']
-    # Use the imported function from dataHandler to look up the user by name
-    user_info = lookUpUserByName(name)
-    if user_info:
-        return f"User found: {user_info}"
-    else:
-        return "User not found."
+    session = request.environ.get('beaker.session')
+    return search.search_users(session)
+
+'''Calling search_users method from logic, search.py
+Using GET method here and passing a session ID'''
 
 @app.route('/search', method="GET")
 def search():
-    name = request.form['userName']
-    # Use the imported function from dataHandler to look up the user by name
-    user_info = lookUpUserByName(name)
-    if user_info:
-        return f"User found: {user_info}"
-    else:
-        return "User not found."
+    session = request.environ.get('beaker.session')
+    return search.search_users(session)
+
+'''Calling get_rating method from logic, ratings.py
+Using POST method here and passing a session ID'''
 
 @app.route('/search', method="POST")
 def ratings():
-    pass
+    session = request.environ.get('beaker.session')
+    return ratings.get_rating(session)
+
+'''Calling get_rating method from logic, ratings.py
+Using GET method here and passing a session ID'''
 
 @app.route('/search', method="GET")
 def ratings():
-    pass
+    session = request.environ.get('beaker.session')
+    return search.get_rating(session)
 
 app = SessionMiddleware(app, session_opts)
 
