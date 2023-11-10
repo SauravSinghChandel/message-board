@@ -2,7 +2,7 @@ import bottle
 from bottle import Bottle, route, request, response
 from storage import dataHandler
 from beaker.middleware import SessionMiddleware
-from logic import post
+from logic import post, search
 from user_logic import login, session_check, signin
 import sys
 
@@ -67,6 +67,11 @@ def logout():
 def add_post():
     session = request.environ.get('beaker.session')
     return post.make_post(session)
+
+@app.route('/search', method="POST")
+def search_results():
+    session = request.environ.get('beaker.session')
+    return search.return_search_page()
 
 app = SessionMiddleware(app, session_opts)
 
