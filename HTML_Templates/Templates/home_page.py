@@ -1,7 +1,12 @@
 from logic import post
 
+#Unfinished, commented out
 
-
+#<div id="dark_mode">
+#   <form method="POST" action="/dark">
+#       <input type="submit" value="toggle_dark">
+#   </form>
+#</div>
 
 
 
@@ -63,6 +68,55 @@ def return_template():
             .post-text {
                 font-size: 16px;
             }
+            /* Add some basic styling for better visualization */
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            max-width: 400px;
+        }
+
+        .user-topic-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .topic-heading {
+            display: inline-block;
+            font-size: 1.2em;
+        }
+
+        .user-name {
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .content-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button-box {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .like-button,
+        .dislike-button {
+            flex: 1;
+        }
+
+        .like-count,
+        .dislike-count {
+            text-align: center;
+        }
+
+        .rating-box {
+            margin-top: 10px;
+        }
         </style>"""
     
     recent_posts = post.display_posts()
@@ -74,14 +128,16 @@ def return_template():
                                     User Name
                                 </div>
                                 <div id="search">
-                                    <input type="text" class="searchBar" placeholder="Search...">
-                                    <button type="submit" class="search_button" method="POST">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                                    <form method="POST" action="/search">
+                                        <input type="text" class="searchBar" placeholder="Search...">
+                                        <button type="submit" class="search_button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
                                 </div>
                                 <div id="dark_mode">
                                     <form method="POST" action="/dark">
-                                        <input type="submit" value="Dark">
+                                        <input type="submit" value="toggle_dark">
                                     </form>
                                 </div>
                                 <h2>Create a Post</h2>
@@ -94,11 +150,9 @@ def return_template():
                                     <ul>
                                         {}
                                     </ul>
-                                    
-                            
                             </div>
                         </body>
-                        </html>""".format(''.join(['<div class="post-box"><p>{}</p></div>'.format(post) for post in recent_posts]))
+                        </html>""".format(''.join(recent_posts))
     home_template += html_part
 
     return home_template
