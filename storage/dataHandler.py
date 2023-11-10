@@ -209,9 +209,8 @@ class dataBaseHandler:
         for i in item:
             index = i[2].lower().find(s.lower())
             if index != -1:
-                matchItem = (i[1], i[2], i[3])
+                matchItem = i
                 matches.append(matchItem)
-        print(matches)
         return matches
 
     def updateMessageRating(self, userName, messageID, structure, quality, likeStat, dislikeStat):

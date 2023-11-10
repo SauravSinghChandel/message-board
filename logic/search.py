@@ -9,6 +9,7 @@ dataHandler = dH.dataBaseHandler()
 
 def search_results():
     search_query = request.forms.get('search_box')
+    print(search_query)
     res = []
     data = dataHandler.lookUpSpecificSubstring(search_query)
     if len(data) != 0:

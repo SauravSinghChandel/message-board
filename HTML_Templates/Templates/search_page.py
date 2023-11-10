@@ -1,4 +1,3 @@
-from logic import search
 
 
 
@@ -91,7 +90,12 @@ def return_template(search_results):
                         <form method="get" action="/">
                             <input type="submit" value="Go back home">
                         </form>
-                        </div>
+
+                        <form method="POST" action="/search">
+                            <input type="text" name="search_box" placeholder="Search Topics...">
+                                <button type="submit" name="search_button">Search</button>
+                        </form>
+
                             <div class="container">
                                 
                                 <h2>Search Results</h2>

@@ -114,16 +114,18 @@ def return_template(username):
         </style>"""
     
     recent_posts = post.display_posts()
+    recent_posts = recent_posts[::-1]
     
     html_part = f"""</head>
                         <body>
-                            <div id="search"?
-                                <form method="POST" action="/search">
-                                    <input type="text" class="searchBar" placeholder="Search...">
-                                        <button type="submit" class="search_button">Search</button>
-                                </form>
+                            
                             </div>
                             <div class="container">
+                                <div id="search">
+                                <form method="POST" action="/search">
+                                    <input type="text" name="search_box" placeholder="Search Topics...">
+                                        <button type="submit" name="search_button">Search</button>
+                                </form>
                                 <div id="user-info">
                                     {username}
                                     <form id="logout"  method="get" action="/logout">
