@@ -24,7 +24,7 @@
 ## Project details
 ### Starting the app 
 
-Running the main.py file should get the app started.
+Running the main.py file should get the app started. Fernet needs to be installed.
 ### The Docs folder
 ##### Contains: 
 - Component Architecture - Contains individual component details
