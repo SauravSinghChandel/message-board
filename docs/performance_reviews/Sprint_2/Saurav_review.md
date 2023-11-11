@@ -1,1 +1,6 @@
-
+| Teammate | Performance Review                       | Comments                                                                                                                                                                            |
+|----------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cameron  | - Precise <br/> - Reliable | - Excellent HTML and CSS skils </br> - Some div and forms were made with class names instead of names                                                                           |
+| Gurleen  | - Collaborative <br/> - Proactive          | - Server side code was upto the mark in terms of formatting </br> - Some methods should be processed in the app logic to maintain abstraction|
+| Rishi    | - Thorough  <br/> - Skillful       | - The documentations and team documentation work was excellent. </br> - Working code for app logic was not submitted           |
+| Baasil   | - Impressive work ethic <br/> - Consistent | - Baasil met project deadlines and delivered high-quality code. </br> - Could avoid formatting results in databaseHandler so the results are uniform through all the methods 

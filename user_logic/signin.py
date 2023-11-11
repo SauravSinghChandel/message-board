@@ -9,29 +9,7 @@ key = b'2hX8MUwJ_JDcuQTv2YnwsVcP7Bij3Bw_9KTFkvhDiMc='
 fernet = Fernet(key)
 dataHandler = dH.dataBaseHandler()
 
-# def encrypt_password(password, salt=None):
-#     """
-#     Encrypt a password using a salt and PBKDF2-HMAC-SHA256.
 
-#     Args:
-#         password (str): The password to be encrypted.
-#         salt (bytes, optional): The salt used for encryption. If not provided, a new random salt is generated.
-
-#     Returns:
-#         str: The concatenated salt and password hash as a hexadecimal string.
-#     """
-
-#     if salt is None:
-#         salt = hashlib.sha256(os.urandom(64)).hexdigest().encode('ascii')
-#         print(salt, len(salt))
-
-#     password_hash = hashlib.pbkdf2_hmac('sha256', password
-#                                         .encode('utf-8'), salt, 100000)
-
-#     salt = salt.hex()
-#     password_hash = password_hash.hex()
-
-#     return salt + password_hash
 
 
 def is_user_id_unique(user_id):
