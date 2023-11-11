@@ -48,10 +48,8 @@ def login(username, password):
         bool: True if the user is authenticated; False otherwise.
     """
     user_details = dataHandler.lookUpUserName(username)
-    print(user_details)
     if len(user_details) == 1:
         user_details = list(user_details[0])
-        print(user_details)
         if username == user_details[1] and verify_password(user_details[2], password):
             return True
 

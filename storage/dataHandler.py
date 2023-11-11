@@ -13,6 +13,7 @@ c.execute(f"""CREATE TABLE IF NOT EXISTS users(
 c.execute(f"""CREATE TABLE IF NOT EXISTS messages(
             date varChar(255) NOT NULL,
             userName varchar(255) NOT NULL,
+            topic varchar(255) NOT NULL,
             message varchar(255) NOT NULL,
             message_ID int NOT NULL,
             FOREIGN KEY(userName) REFERENCES users(userName)
@@ -86,7 +87,7 @@ class dataBaseHandler:
         conn.close()
         return item
 
-    def lookUpUserName(self,userName):
+    def lookUpUserName(self, userName):
         """
         Looks up a specific record using userName
         :param userName: The username
@@ -155,11 +156,11 @@ class dataBaseHandler:
         self._messageItems.append(new_item)
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("INSERT INTO messages VALUES (?,?,?,?)", (new_item[0], new_item[1], new_item[2], new_item[3]))
+        c.execute("INSERT INTO messages VALUES (?,?,?,?, ?)", (new_item[0], new_item[1], new_item[2], new_item[3], new_item[4]))
         #Adding initial ratings, like and dislike counts.
         #The rating system is assumed to be from 0 to 10, so averages are added.
         #Initial like and dislike counts are set to 0.
-        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[3], "5", "5", "0", "0"))
+        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], "5", "5", "0", "0"))
         conn.commit()
         conn.close()
 
@@ -208,7 +209,7 @@ class dataBaseHandler:
         for i in item:
             index = i[2].lower().find(s.lower())
             if index != -1:
-                matchItem = (i[1], i[2], i[3])
+                matchItem = i
                 matches.append(matchItem)
         return matches
 
