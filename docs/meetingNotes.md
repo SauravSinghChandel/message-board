@@ -170,9 +170,11 @@ Next Meeting on Monday 8:00 PM
 * Import function from user_logic file
 * signup and do login in the server code
 * comment out the other code
-* login, logout, signup, index 
+* login, logout, signup, index
 
-## Oct 18, 2023
+# Sprint 2
+
+## Oct 30, 2023
 * **Recorded by:** Rishi
 * **Notes submiited on:** Oct 30, 2023  
 * **SCRUM master:** Saurav
@@ -202,3 +204,141 @@ Next Meeting on Monday 8:00 PM
 * need to make another method for search, a method that calls fetched data from database and updates it, function to aggregate everything, take the array and average it and post it
 
 Next Meeting 6pm Oct 31st
+
+## Oct 31, 2023
+* **Recorded by:** Rishi
+* **Notes submiited on:** Oct 31, 2023  
+* **SCRUM master:** Baasil
+* **Venue:** Discord 
+* **Source:** assignment2.md  
+* **Time:** 6:00 - 6:30 PM  
+* **Attendance:** Gurleen, Baasil, Rishi
+
+### Agenda for the meeting 
+*  Issuing tasks for everyone, checking up on tasks and progress completed
+
+
+### Important Points
+* implementing a rating/review function for users, making all code modular and easi;y readable
+
+### Baasil
+* started working on his part of the code
+
+### Gurleen
+* working on making post requests
+
+### Rishi
+* working on making search method and aggregate everything function
+
+## Nov 2nd,2023
+* Scrum master: Cameron
+* Recorded by: Baasil 
+* Notes submitted on: Nov 2nd
+* Venue: Discord
+* Time: 8:30 to 9:00 PM
+* Attendence: Gurleen, Baasil, Cameron, Saurav, Rishi
+
+Agenda for the meeting
+* Discuss feedback on sprint 1 
+
+Discuss and agree on a method to do code reviews
+
+Discuss methods to better utilize the kanban board
+
+Discuss a better method to do performance reviews
+
+Assign Tasks for members for sprint 2
+
+Tasks assigned
+
+* Saurav : fixing login authentication
+* Cameron: Doing the search feature (search bar, buttons etc.)
+* Rishi: aggregating data and passing ratings data to be stored into the database
+* Gurleen: Implementing the post and get request for the searching and the ratings.
+* Baasil: Building the search function and a method to pass ratings data.
+
+## Nov 4th, 2023
+* Recorded by: Cameron
+* Notes submiited on: Nov 4th,2023
+* SCRUM master: Saurav
+* Venue: Discord
+* Time: 8:00 - 8:15 PM
+* Attendance: Gurleen, Baasil, Saurav, Cameron
+* Absent: Rishi
+
+Agenda for the meeting
+* Discuss code reviews, what to do next
+* Discuss responsibilities and code to be implemented next
+* Getting Code Updates
+
+No code was pushed by Rishi; so app logic will be completed by Saurav
+
+## Nov 5th, 2023
+* Recorded by: Saurav
+* Notes submiited on: Nov 5th,2023
+* SCRUM master: Gurleen
+* Venue: Discord
+* Time: 8:00 - 8:15 PM
+* Attendance: Gurleen, Baasil, Saurav, Cameron
+* Absent: Rishi
+
+Agenda
+* Code reviews, status update 
+
+Notes
+* All the present members will do a code review and leave any appropriate comments in the pull request
+* Saurav was assigned for Pull request approvals
+* Code reviews can be found in pull request #24, #25, #26 and #29
+* Code Reviews Done
+
+## Nov 7th, 2023
+* Recorded by: Gurleen
+* Date: Nov 10th, 2023
+* Venue: Discord
+* Scrum master: Rishi
+* Time: 9:00 PM - 9:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Agenda for the meeting: 
+* Refactoring post design, Discussing Future implementation
+
+Restructuring the post
+
+* How should the post look like
+* Topic goes on top
+* Don’t need to call search method again and again
+* Implementing the box
+* Make separate HTML File 
+	* Return css and html.format
+	* Format string and passed on to placeholders outside of the home page
+* Idea- display on the same page
+* App logic
+	* Making a new method that will give the string of HTML to format in the HTML code.
+
+* Database 
+  * Change search parameter to topic instead of message
+
+## Nov 10th, 2023
+* Recorded by: Cameron
+* Notes submiited on: Nov 4th,2023
+* SCRUM master: Saurav
+* Venue: Discord
+* Time: 8:00 - 8:15 PM
+* Attendance: Gurleen, Baasil, Saurav, Cameron, Rishi
+
+Agenda for the meeting
+* Discuss code reviews
+* Finalize all the pull requests and merge to the master branch
+* Discuss UML file for the project
+
+Notes
+* All the code reviews were discussed
+* README file was updated
+* All meeting notes were merged to the main branch
+* Performance reviews and unittests were implemented
+
+* To avoid frequent pull requests we decided to submit all the meeting notes at once
+* We weren't clear about updating new features as issues in the kanban board before we decided our process, so we uploaded the cards for sprint 2. 
+* From sprint 3 we will make the change to adding everything as issues.
+
+
