@@ -1,28 +1,49 @@
 # Term Project - Team J
 ***
 ## Project Status 
-User can signup and create an account. Make a post and see recent posts. Login functionality is temporarily down due to password hashing bug.
+#### Status after Sprint 2:
+
+##### Updates:
+
+* Changed the format of how posts are saved.
+* Changed the status of how posts are displayed.
+* Added search functionality.
+* Session management completed.
+* Login bug from Sprint 1 was fixed.
+* Overall improved UI of home page and search page.
+
+##### Backlogs:
+* Ratings functionality not completely working. 
+* Dark mode feature still not implemented.
+* Search for other users still not implemented.
+* Saving post drafts still not implemented.
+* Blocking feature not implemented.
+* Profile picture upload not implemented.
+* No different themes added.
+
 ## Project details
 ### Starting the app 
 
 Running the main.py file should get the app started.
 ### The Docs folder
 ##### Contains: 
-- performance_reviews/ - Contains all the performance reviews done by everyone.
+- Component Architecture - Contains individual component details
+- performance_reviews/ Sprint_2- Contains all the performance reviews done by everyone.
 - user_stories/ - Contains all the user stories
 - meetingNotes.md - Contains the meeting notes.
 - applogic.md - Contains the applogic. Used only as a reference.
-- architecture.png - The project architecture, which is same as assigned.
+- Process Analysis - 
+- UML - Contains the UML Diagrams.
 ## The Architecture 
 No major deviations from the architecture given in class were made.
 
-![](docs/architecture.png)
+![](docs/UML/Full_Project_Sprint_2.png)
 
-- **Developer 1 - Gurleen**
-- **Developer 2 - Rishi**
-- **Developer 3 - Baasil**
-- **Developer 4 - Cameron**
-- **Developer 5 - Saurav**
+- **Server - Gurleen**
+- **logic - Rishi**
+- **dataHandler - Baasil**
+- **HTML_Templates - Cameron**
+- **user_logic - Saurav**
 
 ## Progress tracking
 - Meeting notes can be found [here.](https://github.com/CS2005F23/term-project-teamj/blob/master/docs/meetingNotes.md)
@@ -71,5 +92,4 @@ and individual branches are given in the following table below.
 - login.py - login logic and password userr verification (Note: This is not working due to some changes in encryption logic, marker is requested to please use sign in button)
 - session_check.py - checks if the user is logged in
 - signin.py - adds user to the database and verifies their username
-
 

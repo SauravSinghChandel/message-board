@@ -30,32 +30,45 @@ class TestUserStorage(TestCase):
         with self.assertRaises(IndexError):
             self.assertNotEqual(self.handler.lookUpUserName(user[1])[0], user)
 
-class TestMessageStorage(TestCase):
+class TesttopicStorage(TestCase):
     def setUp(self):
         self.handler = dataBaseHandler()
         user = (11, "Johnny", "12345")
         self.handler.addUser(user)
-        message = ("21-02-2023 17:42", "Johnny", "Hello", "1")
-        self.handler.addMessage(message)
+        topic = ("21-02-2023 17:42", "Johnny", "Hello", "1")
+        self.handler.addtopic(topic)
 
     def tearDown(self):
         user = (11, "Johnny", "12345")
-        message = ("21-02-2023 17:42", "Johnny", "Hello", "1")
-        self.handler.deleteMessage(message[1], message[3])
+        topic = ("21-02-2023 17:42", "Johnny", "Hello", "1")
+        self.handler.deletetopic(topic[1], topic[3])
         self.handler.removeUser(str(user[0]))
 
-    def test_addMessage(self):
+    def test_addtopic(self):
         user = (11, "Johnny", "12345")
-        message = ("21-02-2023 17:42", "Johnny", "Hello", 1)
-        self.assertEqual(self.handler.lookUpSpecificMessage(user[1], message[3])[0], message)
+        topic = ("21-02-2023 17:42", "Johnny", "Hello", 1)
+        self.assertEqual(self.handler.lookUpSpecifictopic(user[1], topic[3])[0], topic)
 
-    def test_deleteMessage(self):
+    def test_deletetopic(self):
         user = (11, "Johnny", "12345")
-        message = ("21-02-2023 17:42", "Johnny", "Hello", 1)
-        self.handler.addMessage(message)
-        self.handler.deleteMessage(message[1], message[3])
+        topic = ("21-02-2023 17:42", "Johnny", "Hello", 1)
+        self.handler.addtopic(topic)
+        self.handler.deletetopic(topic[1], topic[3])
         with self.assertRaises(IndexError):
-            self.assertNotEqual(self.handler.lookUpSpecificMessage(user[1], message[3])[0], message)
+            self.assertNotEqual(self.handler.lookUpSpecifictopic(user[1], topic[3])[0], topic)
+
+    def test_getRatings(self):
+        user = (11, "Johnny", "12345")
+        topic = ("21-02-2023 17:42", "Johnny", "Hello", 1)
+        self.assertEqual(self.handler.getSpecifictopicRatings("Johnny", 1), (5, 5, 0, 0))
+
+    def test_getSubstring(self):
+        user = (11, "Johnny", "12345")
+        topic = ("21-02-2023 17:42", "Johnny", "Hello", 1)
+        self.assertEqual(self.handler.lookUpSpecificSubstring("llo"), topic)
+
+
+
 
 
 
