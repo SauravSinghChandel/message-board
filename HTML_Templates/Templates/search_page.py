@@ -1,6 +1,3 @@
-
-
-
 def return_template(search_results):
 
     search_template = """<!DOCTYPE html>
