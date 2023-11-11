@@ -1,7 +1,12 @@
 from logic import post
 
+#Unfinished, commented out
 
-
+#<div id="dark_mode">
+#   <form method="POST" action="/dark">
+#       <input type="submit" value="toggle_dark">
+#   </form>
+#</div>
 
 
 
