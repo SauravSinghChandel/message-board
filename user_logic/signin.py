@@ -3,8 +3,6 @@ from HTML_Templates.Templates import sign_in_page
 from storage import dataHandler as dH
 import secrets
 import string
-import hashlib
-import os
 from cryptography.fernet import Fernet
 
 key = b'2hX8MUwJ_JDcuQTv2YnwsVcP7Bij3Bw_9KTFkvhDiMc='
