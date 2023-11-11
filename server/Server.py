@@ -76,6 +76,15 @@ def add_post():
 
 '''Calling search_users method from logic, search.py
 Using POST method here and passing a session ID'''
+@app.route('/search', method="POST")
+def search_results():
+    session = request.environ.get('beaker.session')
+    return search.return_search_page()
+
+app = SessionMiddleware(app, session_opts)
+
+'''Calling search_users method from logic, search.py
+Using POST method here and passing a session ID'''
 
 @app.route('/search', method="POST")
 def search():
