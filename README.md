@@ -4,7 +4,7 @@
 #### Status after Sprint 2:
 
 ##### Updates:
-
+* Please run "pip install cryptography" in the terminal
 * Changed the format of how posts are saved.
 * Changed the status of how posts are displayed.
 * Added search functionality.
