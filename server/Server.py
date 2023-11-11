@@ -3,7 +3,7 @@ from bottle import Bottle, route, request, response
 from storage import dataHandler
 from dataHandler import *
 from beaker.middleware import SessionMiddleware
-from logic import post
+from logic import post, search
 from user_logic import login, session_check, signin
 import sys
 
@@ -74,8 +74,10 @@ def add_post():
     session = request.environ.get('beaker.session')
     return post.make_post(session)
 
+
 '''Calling search_users method from logic, search.py
 Using POST method here and passing a session ID'''
+
 @app.route('/search', method="POST")
 def search_results():
     session = request.environ.get('beaker.session')
