@@ -3,33 +3,35 @@ from HTML_Templates.Templates import sign_in_page
 from storage import dataHandler as dH
 import secrets
 import string
-import hashlib
-import os
+from cryptography.fernet import Fernet
 
+key = b'2hX8MUwJ_JDcuQTv2YnwsVcP7Bij3Bw_9KTFkvhDiMc='
+fernet = Fernet(key)
 dataHandler = dH.dataBaseHandler()
 
-def encrypt_password(password, salt=None):
-    """
-    Encrypt a password using a salt and PBKDF2-HMAC-SHA256.
+# def encrypt_password(password, salt=None):
+#     """
+#     Encrypt a password using a salt and PBKDF2-HMAC-SHA256.
 
-    Args:
-        password (str): The password to be encrypted.
-        salt (bytes, optional): The salt used for encryption. If not provided, a new random salt is generated.
+#     Args:
+#         password (str): The password to be encrypted.
+#         salt (bytes, optional): The salt used for encryption. If not provided, a new random salt is generated.
 
-    Returns:
-        str: The concatenated salt and password hash as a hexadecimal string.
-    """
+#     Returns:
+#         str: The concatenated salt and password hash as a hexadecimal string.
+#     """
 
-    if salt is None:
-        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+#     if salt is None:
+#         salt = hashlib.sha256(os.urandom(64)).hexdigest().encode('ascii')
+#         print(salt, len(salt))
 
-    password_hash = hashlib.pbkdf2_hmac('sha256', password
-                                        .encode('utf-8'), salt, 100000)
+#     password_hash = hashlib.pbkdf2_hmac('sha256', password
+#                                         .encode('utf-8'), salt, 100000)
 
-    salt = salt.hex()
-    password_hash = password_hash.hex()
+#     salt = salt.hex()
+#     password_hash = password_hash.hex()
 
-    return salt + password_hash
+#     return salt + password_hash
 
 
 def is_user_id_unique(user_id):
@@ -97,7 +99,7 @@ def save_user(username, password):
         None
     """
     user_id = generate_unique_user_id()
-    password_encrypted = encrypt_password(password)
+    password_encrypted = fernet.encrypt(password.encode())
 
     dataHandler.addUser((user_id, username, password_encrypted))
 

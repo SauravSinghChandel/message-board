@@ -13,9 +13,20 @@ c.execute(f"""CREATE TABLE IF NOT EXISTS users(
 c.execute(f"""CREATE TABLE IF NOT EXISTS messages(
             date varChar(255) NOT NULL,
             userName varchar(255) NOT NULL,
+            topic varchar(255) NOT NULL,
             message varchar(255) NOT NULL,
             message_ID int NOT NULL,
             FOREIGN KEY(userName) REFERENCES users(userName)
+            )""")
+c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingData(
+            userName varchar(255) NOT NULL,
+            message_ID int NOT NULL,
+            structure int NOT NULL,
+            quality int NOT NULL,
+            likeStat int NOT NULL,
+            dislikeStat int NOT NULL,
+            FOREIGN KEY(userName) REFERENCES users(userName)
+            FOREIGN KEY(message_ID) REFERENCES messages(message_ID)
             )""")
 conn.commit()
 conn.close()
@@ -76,7 +87,7 @@ class dataBaseHandler:
         conn.close()
         return item
 
-    def lookUpUserName(self,userName):
+    def lookUpUserName(self, userName):
         """
         Looks up a specific record using userName
         :param userName: The username
@@ -145,7 +156,11 @@ class dataBaseHandler:
         self._messageItems.append(new_item)
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("INSERT INTO messages VALUES (?,?,?,?)", (new_item[0], new_item[1], new_item[2], new_item[3]))
+        c.execute("INSERT INTO messages VALUES (?,?,?,?, ?)", (new_item[0], new_item[1], new_item[2], new_item[3], new_item[4]))
+        #Adding initial ratings, like and dislike counts.
+        #The rating system is assumed to be from 0 to 10, so averages are added.
+        #Initial like and dislike counts are set to 0.
+        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], "5", "5", "0", "0"))
         conn.commit()
         conn.close()
 
@@ -178,6 +193,61 @@ class dataBaseHandler:
         conn.close()
         return item
 
+    def lookUpSpecificSubstring(self, s):
+        """
+        Returns all the messages containing the specific substring
+        :param s: The substring
+        :return:
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * from messages")
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        matches = []
+        for i in item:
+            index = i[2].lower().find(s.lower())
+            if index != -1:
+                matchItem = i
+                matches.append(matchItem)
+        return matches
+
+    def updateMessageRating(self, userName, messageID, structure, quality, likeStat, dislikeStat):
+        """
+        Updates the message ratings for an individual message
+        :param userName: The username of the user
+        :param messageID: The unique message ID
+        :param structure: The rating for the structure
+        :param quality: The rating for the quality
+        :param likeStat: The like count
+        :param dislikeStat: The dislike count
+        :return:
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("""UPDATE messageRatingData SET structure = (?), quality = (?), likeStat = (?), dislikeStat = (?) 
+                  WHERE userName = (?) AND message_ID = (?)""", (structure, quality, likeStat, dislikeStat, userName, messageID))
+        conn.commit()
+        conn.close()
+
+    def getSpecificMessageRatings(self, userName, messageID):
+        """
+        Returns the ratings for a specific message
+        :param userName: The username of the user
+        :param messageID: The unique messageID
+        :return:
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * from messageRatingData WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+        item = c.fetchall()
+        returnTuple = (item[0][2], item[0][3], item[0][4], item[0][5])
+        conn.commit()
+        conn.close()
+        return returnTuple
+
+
     def deleteMessage(self, userName, messageID):
         """
         Deletes a message
@@ -189,6 +259,7 @@ class dataBaseHandler:
             conn = sqlite3.connect('APP.db')
             c = conn.cursor()
             c.execute("DELETE from messages WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+            c.execute("DELETE from messageRatingData WHERE message_ID = (?)", (messageID,))
             item = c.fetchall()
             conn.commit()
             conn.close()
@@ -204,11 +275,12 @@ class dataBaseHandler:
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("DROP TABLE messages")
+        c.execute("DROP TABLE messageRatingData")
         conn.commit()
         conn.close()
 
 
-    def displayTableMessages(self, n):
+    def displayTableMessages(self):
         """Display the table"""
         """
         Displays all the messages
@@ -216,7 +288,21 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * FROM messages LIMIT ?", (n, ))
+        c.execute("SELECT * FROM messages")
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
+    def displayTableMessageRatings(self):
+        """Display the table"""
+        """
+        Displays all the message ratings.
+        :return: null
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * FROM messageRatingData")
         item = c.fetchall()
         conn.commit()
         conn.close()

@@ -10,8 +10,7 @@ from logic import post
 
 
 
-
-def return_template():
+def return_template(username):
     
     home_template = """<!DOCTYPE html>
     <html>
@@ -120,39 +119,39 @@ def return_template():
         </style>"""
     
     recent_posts = post.display_posts()
+    recent_posts = recent_posts[::-1]
     
-    html_part = """</head>
+    html_part = f"""</head>
                         <body>
+                            
+                            </div>
                             <div class="container">
-                                <div id="user-info">
-                                    User Name
-                                </div>
                                 <div id="search">
-                                    <form method="POST" action="/search">
-                                        <input type="text" class="searchBar" placeholder="Search...">
-                                        <button type="submit" class="search_button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                                <div id="dark_mode">
-                                    <form method="POST" action="/dark">
-                                        <input type="submit" value="toggle_dark">
+                                <form method="POST" action="/search">
+                                    <input type="text" name="search_box" placeholder="Search Topics...">
+                                        <button type="submit" name="search_button">Search</button>
+                                </form>
+                                <div id="user-info">
+                                    {username}
+                                    <form id="logout"  method="get" action="/logout">
+                                    <input type="submit" value="Logout">
                                     </form>
                                 </div>
                                 <h2>Create a Post</h2>
                                 <form id="post-form" method="post" action="/post">
+                                    <textarea id="topic-box" name="topic" rows="1" cols="25" placeholder="Topic Name"></textarea>
+
                                     <textarea id="post-box" name="post" rows="4" cols="50" placeholder="What's on your mind?"></textarea>
                                     <br>
                                     <input type="submit" value="Post">
                                 </form>
                                 <h2>Recent Posts</h2>
                                     <ul>
-                                        {}
+                                        {''.join(recent_posts)}
                                     </ul>
                             </div>
                         </body>
-                        </html>""".format(''.join(recent_posts))
+                        </html>"""
     home_template += html_part
 
     return home_template

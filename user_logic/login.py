@@ -2,11 +2,15 @@ from bottle import request, redirect
 from storage import dataHandler as dH
 from HTML_Templates.Templates import login_page as lp
 import hashlib
+from cryptography.fernet import Fernet
+
 
 dataHandler = dH.dataBaseHandler()
+key = b'2hX8MUwJ_JDcuQTv2YnwsVcP7Bij3Bw_9KTFkvhDiMc='
+fernet = Fernet(key)
 
 
-def verify_password(stored_password, provided_password):   
+def verify_password(stored_password, provided_password):
     """
     Verify a user's password by comparing the provided password with the stored password hash.
 
@@ -17,15 +21,9 @@ def verify_password(stored_password, provided_password):
     Returns:
         bool: True if the provided password matches the stored password; False otherwise.
     """
-    salt = stored_password[:64]  # The first 64 characters are the salt
-    stored_password = stored_password[64:]  # The rest is the hashed password
+    
 
-    password_hash = hashlib.pbkdf2_hmac('sha256', provided_password
-                                        .encode('utf-8'),
-                                        salt.encode('ascii'), 100000)
-    password_hash = password_hash.hex()
-
-    return password_hash == stored_password
+    return provided_password == fernet.decrypt(stored_password).decode()
 
 
 def login_page():
@@ -52,8 +50,7 @@ def login(username, password):
     user_details = dataHandler.lookUpUserName(username)
     if len(user_details) == 1:
         user_details = list(user_details[0])
-        if username == user_details[1] and verify_password(password, user_details[2]):
-            print('true')
+        if username == user_details[1] and verify_password(user_details[2], password):
             return True
 
     return False
@@ -73,7 +70,7 @@ def do_login(session_data):
     username = request.forms.get('username')
     password = request.forms.get('password')
     if login(username, password):
-        session_data['user'] == username
+        session_data['user'] = username
         redirect('/')
     else:
         return "Login failed. <a href='/login'>Try again</a>"
