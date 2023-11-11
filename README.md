@@ -32,10 +32,10 @@ Running the main.py file should get the app started.
 - user_stories/ - Contains all the user stories
 - meetingNotes.md - Contains the meeting notes.
 - applogic.md - Contains the applogic. Used only as a reference.
-- Process Analysis - 
+- Process Analysis - Goes over how decisions were made.
 - UML - Contains the UML Diagrams.
 ## The Architecture 
-No major deviations from the architecture given in class were made.
+
 
 ![](docs/UML/Full_Project_Sprint_2.png)
 
@@ -89,7 +89,29 @@ and individual branches are given in the following table below.
 - attributions.md - The attributions file.
 ### user_logic
 ##### Contains:
-- login.py - login logic and password userr verification (Note: This is not working due to some changes in encryption logic, marker is requested to please use sign in button)
+- login.py - login logic
 - session_check.py - checks if the user is logged in
 - signin.py - adds user to the database and verifies their username
+
+
+## Architecture Details
+
+Architecture details can be found [here.](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/Component%20Architecture)
+
+## Code Reviews
+* Code reviews were done on github in the form of Pull request feedbacks.
+* Pull request number: (#24, #25, #26, #29, #32, #33, #34, #35, #36, #39, #40, #41)
+* [#24](https://github.com/CS2005F23/term-project-teamj/pull/24)
+* [#25](https://github.com/CS2005F23/term-project-teamj/pull/25)
+*  [#26](https://github.com/CS2005F23/term-project-teamj/pull/26)
+*  [#29](https://github.com/CS2005F23/term-project-teamj/pull/29)
+*  [#32](https://github.com/CS2005F23/term-project-teamj/pull/32)
+*  [#33](https://github.com/CS2005F23/term-project-teamj/pull/33)
+*  [#34](https://github.com/CS2005F23/term-project-teamj/pull/34)
+*  [#35](https://github.com/CS2005F23/term-project-teamj/pull/35)
+*  [#36](https://github.com/CS2005F23/term-project-teamj/pull/36)
+* [#39](https://github.com/CS2005F23/term-project-teamj/pull/39)
+* [#40](https://github.com/CS2005F23/term-project-teamj/pull/40)
+* [#41](https://github.com/CS2005F23/term-project-teamj/pull/41)
+
 
