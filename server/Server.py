@@ -75,7 +75,9 @@ def add_post():
     return post.make_post(session)
 
 
-'''Calling search_users method from logic, search.py
+
+'''Calling return_search_users method from logic, search.py
+
 Using POST method here and passing a session ID'''
 
 @app.route('/search', method="POST")
@@ -84,6 +86,7 @@ def search_results():
     return search.return_search_page()
 
 app = SessionMiddleware(app, session_opts)
+
 
 '''Calling search_users method from logic, search.py
 Using POST method here and passing a session ID'''

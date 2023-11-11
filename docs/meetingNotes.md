@@ -331,7 +331,9 @@ Agenda for the meeting
 * Finalize all the pull requests and merge to the master branch
 * Discuss UML file for the project
 
-#Notes
+--------------------------------------------------------------------------
+
+# Notes
 * All the code reviews were discussed
 * README file was updated
 * All meeting notes were merged to the main branch
