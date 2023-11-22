@@ -1,5 +1,6 @@
 import unittest
 from unittest import TestCase
+
 from Server import add_post, search_results
 
 

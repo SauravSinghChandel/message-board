@@ -1,28 +1,49 @@
 # Term Project - Team J
 ***
 ## Project Status 
-User can signup and create an account. Make a post and see recent posts. Login functionality is temporarily down due to password hashing bug.
+#### Status after Sprint 2:
+
+##### Updates:
+* Please run "pip install cryptography" in the terminal
+* Changed the format of how posts are saved.
+* Changed the status of how posts are displayed.
+* Added search functionality.
+* Session management completed.
+* Login bug from Sprint 1 was fixed.
+* Overall improved UI of home page and search page.
+
+##### Backlogs:
+* Ratings functionality not completely working. 
+* Dark mode feature still not implemented.
+* Search for other users still not implemented.
+* Saving post drafts still not implemented.
+* Blocking feature not implemented.
+* Profile picture upload not implemented.
+* No different themes added.
+
 ## Project details
 ### Starting the app 
 
-Running the main.py file should get the app started.
+Running the main.py file should get the app started. Fernet needs to be installed.
 ### The Docs folder
 ##### Contains: 
-- performance_reviews/ - Contains all the performance reviews done by everyone.
+- Component Architecture - Contains individual component details
+- performance_reviews/ Sprint_2- Contains all the performance reviews done by everyone.
 - user_stories/ - Contains all the user stories
 - meetingNotes.md - Contains the meeting notes.
 - applogic.md - Contains the applogic. Used only as a reference.
-- architecture.png - The project architecture, which is same as assigned.
+- Process Analysis - Goes over how decisions were made.
+- UML - Contains the UML Diagrams.
 ## The Architecture 
-No major deviations from the architecture given in class were made.
 
-![](docs/architecture.png)
 
-- **Developer 1 - Gurleen**
-- **Developer 2 - Rishi**
-- **Developer 3 - Baasil**
-- **Developer 4 - Cameron**
-- **Developer 5 - Saurav**
+![](docs/UML/Full_Project_Sprint_2.png)
+
+- **Server - Gurleen**
+- **logic - Rishi**
+- **dataHandler - Baasil**
+- **HTML_Templates - Cameron**
+- **user_logic - Saurav**
 
 ## Progress tracking
 - Meeting notes can be found [here.](https://github.com/CS2005F23/term-project-teamj/blob/master/docs/meetingNotes.md)
@@ -68,8 +89,29 @@ and individual branches are given in the following table below.
 - attributions.md - The attributions file.
 ### user_logic
 ##### Contains:
-- login.py - login logic and password userr verification (Note: This is not working due to some changes in encryption logic, marker is requested to please use sign in button)
+- login.py - login logic
 - session_check.py - checks if the user is logged in
 - signin.py - adds user to the database and verifies their username
+
+
+## Architecture Details
+
+Architecture details can be found [here.](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/Component%20Architecture)
+
+## Code Reviews
+* Code reviews were done on github in the form of Pull request feedbacks.
+* Pull request number: (#24, #25, #26, #29, #32, #33, #34, #35, #36, #39, #40, #41)
+* [#24](https://github.com/CS2005F23/term-project-teamj/pull/24)
+* [#25](https://github.com/CS2005F23/term-project-teamj/pull/25)
+*  [#26](https://github.com/CS2005F23/term-project-teamj/pull/26)
+*  [#29](https://github.com/CS2005F23/term-project-teamj/pull/29)
+*  [#32](https://github.com/CS2005F23/term-project-teamj/pull/32)
+*  [#33](https://github.com/CS2005F23/term-project-teamj/pull/33)
+*  [#34](https://github.com/CS2005F23/term-project-teamj/pull/34)
+*  [#35](https://github.com/CS2005F23/term-project-teamj/pull/35)
+*  [#36](https://github.com/CS2005F23/term-project-teamj/pull/36)
+* [#39](https://github.com/CS2005F23/term-project-teamj/pull/39)
+* [#40](https://github.com/CS2005F23/term-project-teamj/pull/40)
+* [#41](https://github.com/CS2005F23/term-project-teamj/pull/41)
 
 
