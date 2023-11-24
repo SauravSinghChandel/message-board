@@ -20,7 +20,9 @@ USERS:
 
 """
 
-newHandle.addMessage(("21-02-2023 17:42", "JamesBond","random" ,"Vodka Martini, Shaken, not Stirred.", "1"))
+# newHandle.addMessage(("21-02-2023 17:42", "JamesBond","random" ,"Vodka Martini, Shaken, not Stirred.", "1"))
+
+
 
 # newHandle.addMessage(("21-02-2023 17:44", "LickLider","random" ,"Might invent something else today.", "1"))
 
@@ -58,13 +60,20 @@ print("Message Table Entries:")
 print(newHandle.displayTableMessages())
 print("Ratings Data:")
 print(newHandle.displayTableMessageRatings())
-newHandle.updateMessageRating('JamesBond', '1', 'MarkTwain', '7','7', '7', '7')
+newHandle.updateMessageRating('1', 'MarkTwain', '7','7', '1', '0')
+newHandle.updateMessageRating('1', 'JamesBond', '10','10', '0', '1')
 print("Ratings Data:")
 print(newHandle.displayTableMessageRatings())
 print("Search Data:")
 print(newHandle.lookUpSpecificSubstring("StIrReD"))
 print("Specific Rating Data:")
-print(newHandle.getSpecificMessageRatings("JamesBond", "1"))
+print(newHandle.getSpecificMessageRatings("1"))
+newHandle.saveDraft(("21-02-2023 17:44", "LickLider","random" ,"Might invent something else today.", "1"))
+print(newHandle.lookUpSpecificDraft("1"))
+newHandle.editDraft("1", "Might not invent something else today")
+print(newHandle.lookUpSpecificDraft("1"))
+newHandle.deleteDraft("1")
+print(newHandle.lookUpSpecificDraft("1"))
 
 
 

@@ -1,6 +1,6 @@
 ##Handles all the database operations
 import sqlite3
-import pickle
+import ast
 
 conn = sqlite3.connect("APP.db")
 c = conn.cursor()
@@ -27,6 +27,14 @@ c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingData(
             dislikeStat blob,
             FOREIGN KEY(userName) REFERENCES users(userName)
             FOREIGN KEY(message_ID) REFERENCES messages(message_ID)
+            )""")
+c.execute(f"""CREATE TABLE IF NOT EXISTS messageDrafts(
+            date varChar(255) NOT NULL,
+            userName varchar(255) NOT NULL,
+            topic varchar(255) NOT NULL,
+            message varchar(255) NOT NULL,
+            message_ID int NOT NULL,
+            FOREIGN KEY(userName) REFERENCES users(userName)
             )""")
 conn.commit()
 conn.close()
@@ -160,26 +168,13 @@ class dataBaseHandler:
         #Adding initial ratings, like and dislike counts.
         #The rating system is assumed to be from 0 to 10, so averages are added.
         #Initial like and dislike counts are set to 0.
-        StructurefileName = f"Structure{new_item[1]}{new_item[4]}.pkl"
-        QualityfileName = f"Quality{new_item[1]}{new_item[4]}.pkl"
-        LikeStatfileName = f"LikeStat{new_item[1]}{new_item[4]}.pkl"
-        DislikeStatfileName = f"DislikeStat{new_item[1]}{new_item[4]}.pkl"
 
-        StructureData = {}
-        QualityData = {}
-        LikeStatData = {}
-        DislikeStatData = {}
+        StructureData = str({})
+        QualityData = str({})
+        LikeStatData = str({})
+        DislikeStatData = str({})
 
-        with open(StructurefileName, "wb") as file1:
-            pickle.dump(StructureData, file1)
-        with open(QualityfileName, "wb") as file2:
-            pickle.dump(QualityData, file2)
-        with open(LikeStatfileName, "wb") as file3:
-            pickle.dump(LikeStatData, file3)
-        with open(DislikeStatfileName, "wb") as file4:
-            pickle.dump(DislikeStatData, file4)
-
-        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], StructurefileName, QualityfileName, LikeStatfileName, DislikeStatfileName))
+        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], StructureData, QualityData, LikeStatData, DislikeStatData))
 
         conn.commit()
         conn.close()
@@ -198,7 +193,7 @@ class dataBaseHandler:
         conn.close()
         return item
 
-    def lookUpSpecificMessage(self, userName, messageID):
+    def lookUpSpecificMessage(self, messageID):
         """
         Looks up a specific message of a user
         :param userName: userName
@@ -207,7 +202,7 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * from messages WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+        c.execute("SELECT * from messages WHERE message_ID = (?)", (messageID,))
         item = c.fetchall()
         conn.commit()
         conn.close()
@@ -233,7 +228,7 @@ class dataBaseHandler:
                 matches.append(matchItem)
         return matches
 
-    def updateMessageRating(self, userName, messageID, updaterUserName, structure=None, quality=None, likeStat=None, dislikeStat=None):
+    def updateMessageRating(self,  messageID, updaterUserName, structure=None, quality=None, likeStat=None, dislikeStat=None):
         """
         Updates the message ratings for an individual message
         :param userName: The username of the user who posted
@@ -245,56 +240,37 @@ class dataBaseHandler:
         :param dislikeStat: The dislike count
         :return:
         """
-        inputData = (userName, messageID, structure, quality, likeStat, dislikeStat)
-        StructurefileName = f"Structure{userName}{messageID}.pkl"
-        QualityfileName = f"Quality{userName}{messageID}.pkl"
-        LikeStatfileName = f"LikeStat{userName}{messageID}.pkl"
-        DislikeStatfileName = f"DislikeStat{userName}{messageID}.pkl"
+        inputData = (messageID, structure, quality, likeStat, dislikeStat)
+        # StructurefileName = f"Structure{userName}{messageID}.pkl"
+        # QualityfileName = f"Quality{userName}{messageID}.pkl"
+        # LikeStatfileName = f"LikeStat{userName}{messageID}.pkl"
+        # DislikeStatfileName = f"DislikeStat{userName}{messageID}.pkl"
 
-        StructureData = {}
-        QualityData = {}
-        LikeStatData = {}
-        DislikeStatData = {}
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
 
-        with open(StructurefileName, "rb") as file1:
-            StructureData = pickle.load(file1)
-        with open(QualityfileName, "rb") as file2:
-            QualityData = pickle.load(file2)
-        with open(LikeStatfileName, "rb") as file3:
-            LikeStatData = pickle.load(file3)
-        with open(DislikeStatfileName, "rb") as file4:
-            DislikeStatData = pickle.load(file4)
+        c.execute("SELECT structure from messageRatingData WHERE message_ID = (?)", (messageID,))
+        StructureData = ast.literal_eval(c.fetchall()[0][0])
+        c.execute("SELECT quality from messageRatingData WHERE message_ID = (?)", (messageID,))
+        QualityData = ast.literal_eval(c.fetchall()[0][0])
+        c.execute("SELECT likeStat from messageRatingData WHERE message_ID = (?)", (messageID,))
+        LikeStatData = ast.literal_eval(c.fetchall()[0][0])
+        c.execute("SELECT dislikeStat from messageRatingData WHERE message_ID = (?)", (messageID,))
+        DislikeStatData = ast.literal_eval(c.fetchall()[0][0])
 
-        if updaterUserName not in StructureData and structure != None:
-            StructureData[updaterUserName] = structure
-            with open(StructurefileName, 'wb') as file1:
-                pickle.dump(StructureData, file1)
-
-        if updaterUserName not in QualityData and quality != None:
-            QualityData[updaterUserName] = quality
-            with open(QualityfileName, 'wb') as file2:
-                pickle.dump(QualityData, file2)
-
-        if updaterUserName not in LikeStatData and likeStat != None:
-            LikeStatData[updaterUserName] = likeStat
-            with open(LikeStatfileName, 'wb') as file3:
-                pickle.dump(LikeStatData, file3)
-
-        if updaterUserName not in DislikeStatData and dislikeStat != None:
-            DislikeStatData[updaterUserName] = dislikeStat
-            with open(DislikeStatfileName, 'wb') as file4:
-                pickle.dump(DislikeStatData, file4)
-
-
+        StructureData[updaterUserName] = structure
+        QualityData[updaterUserName] = quality
+        LikeStatData[updaterUserName] = likeStat
+        DislikeStatData[updaterUserName] = dislikeStat
 
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("""UPDATE messageRatingData SET structure = (?), quality = (?), likeStat = (?), dislikeStat = (?) 
-                  WHERE userName = (?) AND message_ID = (?)""", (StructurefileName, QualityfileName, LikeStatfileName, DislikeStatfileName, userName, messageID))
+                  WHERE message_ID = (?)""", (str(StructureData), str(QualityData), str(LikeStatData), str(DislikeStatData), messageID))
         conn.commit()
         conn.close()
 
-    def getSpecificMessageRatings(self, userName, messageID):
+    def getSpecificMessageRatings(self, messageID):
         """
         Returns the ratings for a specific message
         :param userName: The username of the user
@@ -303,22 +279,23 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * from messageRatingData WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+        c.execute("SELECT * from messageRatingData WHERE message_ID = (?)", (messageID,))
         item = c.fetchall()
         returnTuple = (item[0][2], item[0][3], item[0][4], item[0][5])
-        StructureData = {}
-        QualityData = {}
-        LikeStatData = {}
-        DislikeStatData = {}
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
 
-        with open(returnTuple[0], "rb") as file1:
-            StructureData = pickle.load(file1)
-        with open(returnTuple[1], "rb") as file2:
-            QualityData = pickle.load(file2)
-        with open(returnTuple[2], "rb") as file3:
-            LikeStatData = pickle.load(file3)
-        with open(returnTuple[3], "rb") as file4:
-            DislikeStatData = pickle.load(file4)
+        c.execute("SELECT structure from messageRatingData WHERE message_ID = (?)", (messageID,))
+        StructureData = ast.literal_eval(c.fetchall()[0][0])
+        c.execute("SELECT quality from messageRatingData WHERE message_ID = (?)", (messageID,))
+        QualityData = ast.literal_eval(c.fetchall()[0][0])
+        c.execute("SELECT likeStat from messageRatingData WHERE message_ID = (?)", (messageID,))
+        LikeStatData = ast.literal_eval(c.fetchall()[0][0])
+        c.execute("SELECT dislikeStat from messageRatingData WHERE message_ID = (?)", (messageID,))
+        DislikeStatData = ast.literal_eval(c.fetchall()[0][0])
+
+
+
 
         returnStructureData = 0
         returnQualityData = 0
@@ -346,8 +323,30 @@ class dataBaseHandler:
         conn.close()
         return returnTuple
 
+    def saveDraft(self, new_item):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO messageDrafts VALUES (?,?,?,?,?)",
+                  (new_item[0], new_item[1], new_item[2], new_item[3], new_item[4]))
 
-    def deleteMessage(self, userName, messageID):
+        conn.commit()
+        conn.close()
+
+    def editDraft(self, draftID, editVal):
+        """
+
+        :param draftID: THe unique draft ID
+        :return: The deleted item
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messageDrafts SET message = (?) WHERE message_ID = (?)", (editVal, draftID))
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
+    def deleteDraft(self, draftID):
         """
         Deletes a message
         :param userName: userName
@@ -357,7 +356,41 @@ class dataBaseHandler:
         try:
             conn = sqlite3.connect('APP.db')
             c = conn.cursor()
-            c.execute("DELETE from messages WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+            c.execute("DELETE from messageDrafts WHERE message_ID = (?)", (draftID,))
+            item = c.fetchall()
+            conn.commit()
+            conn.close()
+            return item
+        except IndexError:
+            print("Does not exist")
+
+    def lookUpSpecificDraft(self, draftID):
+        """
+        Looks up a specific message of a user
+        :param userName: userName
+        :param messageID: Unique ID of the message
+        :return: Returns the specific message
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * from messageDrafts WHERE message_ID = (?)", (draftID,))
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
+
+    def deleteMessage(self, messageID):
+        """
+        Deletes a message
+        :param userName: userName
+        :param messageID: Unique message ID
+        :return: the deleted item
+        """
+        try:
+            conn = sqlite3.connect('APP.db')
+            c = conn.cursor()
+            c.execute("DELETE from messages WHERE message_ID = (?)", (messageID,))
             c.execute("DELETE from messageRatingData WHERE message_ID = (?)", (messageID,))
             item = c.fetchall()
             conn.commit()
@@ -406,9 +439,3 @@ class dataBaseHandler:
         conn.commit()
         conn.close()
         return item
-
-
-
-
-
-
