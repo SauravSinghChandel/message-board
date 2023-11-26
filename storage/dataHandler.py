@@ -379,6 +379,20 @@ class dataBaseHandler:
         conn.close()
         return item
 
+    def editMessage(self, messageID, editVal):
+        """
+
+        :param messageID: THe unique draft ID
+        :return: The edited item
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messages SET message = (?) WHERE message_ID = (?)", (editVal, messageID))
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
 
     def deleteMessage(self, messageID):
         """
