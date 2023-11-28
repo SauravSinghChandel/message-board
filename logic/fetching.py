@@ -9,7 +9,7 @@ def post_data_formatter(message_table) -> dict:
     res['topic'] = message_table[2]
     res['message'] = message_table[3]
     res['message_id'] = message_table[4]
-    rating = dh.getSpecificMessageRatings(res['username'], res['message_id'])
+    rating = dh.getSpecificMessageRatings(res['message_id'])
     res['structure'] = rating[0]
     res['quality'] = rating[1]
     res['likeStat'] = rating[2]

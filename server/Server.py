@@ -2,7 +2,7 @@ import bottle
 from bottle import Bottle, route, request, response
 from storage import dataHandler
 from beaker.middleware import SessionMiddleware
-from logic import post, search
+from logic import post, search, ratings
 from user_logic import login, session_check, signin
 import sys
 
@@ -72,6 +72,26 @@ def add_post():
 def search_results():
     session = request.environ.get('beaker.session')
     return search.return_search_page()
+
+@app.route('/like/<message_id>', method="POST")
+def like_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.like(session, message_id)
+
+@app.route('/dislike/<message_id>', method="POST")
+def dislike_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.dislike(session, message_id)
+
+@app.route('/structure/<message_id>', method="POST")
+def strucutre_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.structure(session, message_id)
+
+@app.route('/quality/<message_id>', method="POST")
+def quality_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.quality(session, message_id)
 
 app = SessionMiddleware(app, session_opts)
 
