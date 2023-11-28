@@ -8,7 +8,7 @@ import datetime
 dataHandler = dH.dataBaseHandler()
 
 def make_post(session_data):
-    date = str(datetime.date.today())
+    date = str(datetime.datetime.now())
     username = session_data['user']
     content = request.forms.get('post')
     topic = request.forms.get('topic')
@@ -88,7 +88,7 @@ def post_formatter(data: dict) -> str:
     </head>"""
 
     main_body = f"""
-    <div class="post">
+    <div class="post" id="{data['message_id']}">
         <!-- User name and Topic heading in the same line -->
         <div class="user-topic-line">
             <div class="topic-heading">
@@ -109,7 +109,7 @@ def post_formatter(data: dict) -> str:
         <div class="button-box">
             <!-- Like button with count -->
             <div class="like-button">
-                <form action="/like" method="post" target="hidden_iframe">
+                <form action="/like/{data['message_id']}" method="post" target="hidden_iframe">
                     <button type="submit">Like</button>
                 </form>
                 <iframe name="like_hidden_iframe" style="display:none;"></iframe>
@@ -118,7 +118,7 @@ def post_formatter(data: dict) -> str:
 
             <!-- Dislike button with count -->
             <div class="dislike-button">
-                <form action="/Dislike" method="post" target="hidden_iframe">
+                <form action="/dislike/{data['message_id']}" method="post" target="hidden_iframe">
                 <button type="submit">Dislike</button>
                 </form>
                 <iframe name="Dislike_hidden_iframe" style="display:none;"></iframe>
@@ -128,12 +128,21 @@ def post_formatter(data: dict) -> str:
 
         <!-- Rating bars box -->
         <div class="rating-box">
-            <!-- Rating bars -->
-            <label for="rating1">Structure: {data['structure']}</label>
-            <input type="range" id="structure" name="rating1" min="1" max="5">
+            <div>
+                <!-- Rating bars -->
+                <form action="/structure/{data['message_id']}" method="post">
+                <label for="structure">Structure: {data['structure']}</label>
+                <input type="range" id="structure" name="structure" min="1" max="5">
+                <button type="submit">Rate Structure</button>
+                </form>
+            </div>
 
-            <label for="rating2">Quality: {data['quality']}</label>
-            <input type="range" id="quality" name="rating2" min="1" max="5">
+            <div>
+                <form action="/quality/{data['message_id']}" method="post">
+                <label for="quality">Quality: {data['quality']}</label>
+                <input type="range" id="quality" name="quality" min="1" max="5">
+                <button type="submit">Rate Quality</button>
+                </form>
         </div>
     </div>
 
