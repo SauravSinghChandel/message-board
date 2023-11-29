@@ -1,7 +1,5 @@
 from dataHandler import dataBaseHandler
 
-
-
 newHandle = dataBaseHandler()
 # newHandle.addUser((1, "JamesBond", "bondybond"))
 # newHandle.addUser((2, "MarkTwain", "twainyMark"))
@@ -63,5 +61,3 @@ print("Search Data:")
 print(newHandle.lookUpSpecificSubstring("StIrReD"))
 print("Specific Rating Data:")
 print(newHandle.getSpecificMessageRatings("twainyMark", "1"))
-
-
