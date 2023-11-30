@@ -5,7 +5,7 @@ from bottle import Bottle, route, request, response
 from storage import dataHandler
 from beaker.middleware import SessionMiddleware
 from logic import post, search, ratings
-from user_logic import login, session_check, signin
+from user_logic import login, session_check, signin, ch_uname, ch_pass
 import sys
 
 sys.path.append("..")
@@ -94,6 +94,24 @@ def strucutre_message(message_id):
 def quality_message(message_id):
     session = request.get('beaker.session')
     return ratings.quality(session, message_id)
+
+@app.route('/editUsername', method='GET')
+def ch_uname_page():
+    return ch_uname.returnTemplate()
+
+@app.route('/editPassword', method='GET')
+def ch_uname_page():
+    return ch_pass.returnTemplate()
+    
+@app.route('/changeUsername', method='POST')
+def ch_uname_page():
+    session = request.get('beaker.session')
+    return ch_uname.changeUsername(session)
+
+@app.route('/changePassword', method='POST')
+def ch_uname_page():
+    session = request.get('beaker.session')
+    return ch_pass.changePassword(session)
 
 app = SessionMiddleware(app, session_opts)
 

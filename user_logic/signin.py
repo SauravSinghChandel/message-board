@@ -106,19 +106,14 @@ def signup(session_data):
     username = request.forms.get('username')
     password = request.forms.get('password')
     retype_password = request.forms.get('retype-password')
-    print('1')
     # Check if the password and retype_password match
     if password != retype_password:
         return "Password and retype password do not match. <a href='/signup'>Try again</a>"
-    print('2')
     # Check if the username is already in use
     if not username_available(username):
         return "Username already in use. <a href='/signup'>Try a different username</a>"
-    print(3)
     # Create the user
     save_user(username, password)
-    print('4')
     # Set the user in the session
     session_data['user'] = username
-    print(5)
     redirect('/')
