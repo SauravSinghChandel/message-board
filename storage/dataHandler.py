@@ -28,6 +28,16 @@ c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingData(
             FOREIGN KEY(userName) REFERENCES users(userName)
             FOREIGN KEY(message_ID) REFERENCES messages(message_ID)
             )""")
+c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingUserList(
+            message_ID int NOT NULL,
+            likeList str DEFAULT "[]",
+            dislikeList str DEFAULT "[]",
+            structureList str DEFAULT "[]",
+            qualityList str DEFAULT "[]",
+            FOREIGN KEY(message_ID) REFERENCES messageRatingData(message_ID),
+            FOREIGN KEY(message_ID) REFERENCES messages(message_ID)
+            )"""
+        )
 conn.commit()
 conn.close()
 
@@ -160,7 +170,8 @@ class dataBaseHandler:
         #Adding initial ratings, like and dislike counts.
         #The rating system is assumed to be from 0 to 10, so averages are added.
         #Initial like and dislike counts are set to 0.
-        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], "5", "5", "0", "0"))
+        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], "0", "0", "0", "0"))
+        c.execute("INSERT INTO messageRatingUserList VALUES (?, ?, ?, ?, ?)", (new_item[4], "[]", "[]", "[]", "[]"))
         conn.commit()
         conn.close()
 
@@ -213,7 +224,7 @@ class dataBaseHandler:
                 matches.append(matchItem)
         return matches
 
-    def updateMessageRating(self, userName, messageID, structure, quality, likeStat, dislikeStat):
+    def updateMessageRating(self, messageID, structure, quality, likeStat, dislikeStat):
         """
         Updates the message ratings for an individual message
         :param userName: The username of the user
@@ -227,11 +238,11 @@ class dataBaseHandler:
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("""UPDATE messageRatingData SET structure = (?), quality = (?), likeStat = (?), dislikeStat = (?) 
-                  WHERE userName = (?) AND message_ID = (?)""", (structure, quality, likeStat, dislikeStat, userName, messageID))
+                  WHERE message_ID = (?)""", (structure, quality, likeStat, dislikeStat, messageID))
         conn.commit()
         conn.close()
 
-    def getSpecificMessageRatings(self, userName, messageID):
+    def getSpecificMessageRatings(self, messageID):
         """
         Returns the ratings for a specific message
         :param userName: The username of the user
@@ -240,7 +251,7 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * from messageRatingData WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+        c.execute("SELECT * from messageRatingData WHERE message_ID = (?)", (messageID, ))
         item = c.fetchall()
         returnTuple = (item[0][2], item[0][3], item[0][4], item[0][5])
         conn.commit()
@@ -308,8 +319,98 @@ class dataBaseHandler:
         conn.close()
         return item
 
+    def getLikeList(self, message_ID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT likeList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
+        item = c.fetchone()
+        conn.commit()
+        conn.close()
+        return item
+    
+    def setLikeList(self, message_ID, data):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messageRatingUserList SET likeList = (?) WHERE message_ID = (?)", (data, message_ID))
+        conn.commit()
+        conn.close()
+    
+    def getDislikeList(self, message_ID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT dislikeList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
+        item = c.fetchone()
+        conn.commit()
+        conn.close()
+        return item
+    
+    def setDislikeList(self, message_ID, data):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messageRatingUserList SET dislikeList = (?) WHERE message_ID = (?)", (data, message_ID))
+        conn.commit()
+        conn.close()
+    
+    def getQualityList(self, message_ID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT qualityList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
+        item = c.fetchone()
+        conn.commit()
+        conn.close()
+        return item
+    
+    def setQualityList(self, message_ID, data):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messageRatingUserList SET qualityList = (?) WHERE message_ID = (?)", (data, message_ID))
+        conn.commit()
+        conn.close()
 
+    def getStructureList(self, message_ID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT structureList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
+        item = c.fetchone()
+        conn.commit()
+        conn.close()
+        return item
+    
+    def setStructureList(self, message_ID, data):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messageRatingUserList SET structureList = (?) WHERE message_ID = (?)", (data, message_ID))
+        conn.commit()
+        conn.close()
+    
+    def getUserID(self, username):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT username FROM users WHERE userName = (?)", (username, ))
+        item = c.fetchone()[0]
+        conn.commit()
+        conn.close()
+        return item
 
+    def getPassword(self, userID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT password FROM users WHERE user_ID = (?)", (userID, ))
+        item = c.fetchone()[0]
+        conn.commit()
+        conn.close()
+        return item
 
+    def setPassword(self, username, password):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE users SET password = (?) WHERE userName = (?)", (password, username))
+        conn.commit()
+        conn.close()
 
-
+    def setUsername(self, username, userID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE users SET userName = (?) WHERE user_ID = (?)", (username, userID))
+        conn.commit()
+        conn.close()
