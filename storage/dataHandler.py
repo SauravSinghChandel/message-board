@@ -382,3 +382,35 @@ class dataBaseHandler:
         c.execute("UPDATE messageRatingUserList SET structureList = (?) WHERE message_ID = (?)", (data, message_ID))
         conn.commit()
         conn.close()
+    
+    def getUserID(self, username):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT username FROM users WHERE userName = (?)", (username, ))
+        item = c.fetchone()[0]
+        conn.commit()
+        conn.close()
+        return item
+
+    def getPassword(self, userID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT password FROM users WHERE user_ID = (?)", (userID, ))
+        item = c.fetchone()[0]
+        conn.commit()
+        conn.close()
+        return item
+
+    def setPassword(self, username, password):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE users SET password = (?) WHERE userName = (?)", (password, username))
+        conn.commit()
+        conn.close()
+
+    def setUsername(self, username, userID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE users SET userName = (?) WHERE user_ID = (?)", (username, userID))
+        conn.commit()
+        conn.close()
