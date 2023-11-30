@@ -21,6 +21,11 @@ session_opts = {
     'session.auto': True
 }
 
+@app.route('/message/<message_id>/<user_id>')
+def message():
+    message_id = request
+    user_id = request
+    return f"The Message Id for this message is: {message_id} from User Id : {user_id}"
 
 @app.route('/login', method="GET")
 def login_page():
