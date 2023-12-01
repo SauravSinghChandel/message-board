@@ -4,8 +4,8 @@ import bottle
 from bottle import Bottle, route, request, response
 from storage import dataHandler
 from beaker.middleware import SessionMiddleware
-from logic import post, search
-from user_logic import login, session_check, signin
+from logic import post, search, ratings
+from user_logic import login, session_check, signin, ch_uname, ch_pass
 import sys
 
 sys.path.append("..")
@@ -74,6 +74,44 @@ def add_post():
 def search_results():
     session = request.environ.get('beaker.session')
     return search.return_search_page()
+
+@app.route('/like/<message_id>', method="POST")
+def like_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.like(session, message_id)
+
+@app.route('/dislike/<message_id>', method="POST")
+def dislike_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.dislike(session, message_id)
+
+@app.route('/structure/<message_id>', method="POST")
+def strucutre_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.structure(session, message_id)
+
+@app.route('/quality/<message_id>', method="POST")
+def quality_message(message_id):
+    session = request.get('beaker.session')
+    return ratings.quality(session, message_id)
+
+@app.route('/editUsername', method='GET')
+def ch_uname_page():
+    return ch_uname.returnTemplate()
+
+@app.route('/editPassword', method='GET')
+def ch_uname_page():
+    return ch_pass.returnTemplate()
+    
+@app.route('/changeUsername', method='POST')
+def ch_uname_page():
+    session = request.get('beaker.session')
+    return ch_uname.changeUsername(session)
+
+@app.route('/changePassword', method='POST')
+def ch_uname_page():
+    session = request.get('beaker.session')
+    return ch_pass.changePassword(session)
 
 app = SessionMiddleware(app, session_opts)
 

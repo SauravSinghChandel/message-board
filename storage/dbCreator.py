@@ -1,7 +1,5 @@
 from dataHandler import dataBaseHandler
 
-
-
 newHandle = dataBaseHandler()
 # newHandle.addUser((1, "JamesBond", "bondybond"))
 # newHandle.addUser((2, "MarkTwain", "twainyMark"))
@@ -70,6 +68,7 @@ print(newHandle.displayTableMessageRatings())
 print("Search Data:")
 print(newHandle.lookUpSpecificSubstring("StIrReD"))
 print("Specific Rating Data:")
+
 print(newHandle.getSpecificMessageRatings("1"))
 newHandle.saveDraft(("21-02-2023 17:44", "LickLider","random" ,"Might invent something else today.", "1"))
 print(newHandle.lookUpSpecificDraft("1"))
@@ -79,4 +78,7 @@ newHandle.deleteDraft("1")
 print(newHandle.lookUpSpecificDraft("1"))
 
 
+
+
+print(newHandle.getSpecificMessageRatings("twainyMark", "1"))
 
