@@ -288,7 +288,7 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("UPDATE messageDrafts SET draft = (?) draft_ID = (?)", (editVal, draftID))
+        c.execute("UPDATE messageDrafts SET draft = (?) WHERE draft_ID = (?)", (editVal, draftID))
         item = c.fetchall()
         conn.commit()
         conn.close()
