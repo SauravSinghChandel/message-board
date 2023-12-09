@@ -1,6 +1,5 @@
 ##Handles all the database operations
 import sqlite3
-import ast
 
 conn = sqlite3.connect("APP.db")
 c = conn.cursor()
@@ -204,7 +203,6 @@ class dataBaseHandler:
     def lookUpSpecificMessage(self, messageID):
         """
         Looks up a specific message of a user
-        :param userName: userName
         :param messageID: Unique ID of the message
         :return: Returns the specific message
         """
@@ -240,7 +238,6 @@ class dataBaseHandler:
     def updateMessageRating(self, messageID, structure, quality, likeStat, dislikeStat):
         """
         Updates the message ratings for an individual message
-        :param userName: The username of the user
         :param messageID: The unique message ID
         :param structure: The rating for the structure
         :param quality: The rating for the quality
@@ -258,7 +255,6 @@ class dataBaseHandler:
     def getSpecificMessageRatings(self, messageID):
         """
         Returns the ratings for a specific message
-        :param userName: The username of the user
         :param messageID: The unique messageID
         :return:
         """
@@ -272,6 +268,11 @@ class dataBaseHandler:
         return returnTuple
 
     def saveDraft(self, new_item):
+        """
+        Saves a new draft
+        :param new_item: Tuple in the format (time, username, topic, content, draftid)
+        :return: null
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("INSERT INTO messageDrafts VALUES (?,?,?,?,?)",
@@ -282,8 +283,9 @@ class dataBaseHandler:
 
     def editDraft(self, draftID, editVal):
         """
-
-        :param draftID: THe unique draft ID
+        Edits a saved draft
+        :param draftID: The unique draft ID
+        :editVal: The Updated draft message
         :return: The deleted item
         """
         conn = sqlite3.connect('APP.db')
@@ -296,9 +298,8 @@ class dataBaseHandler:
 
     def deleteDraft(self, draftID):
         """
-        Deletes a message
-        :param userName: userName
-        :param messageID: Unique message ID
+        Deletes a draft
+        :param draftID: Unique draft ID
         :return: the deleted item
         """
         try:
@@ -314,10 +315,9 @@ class dataBaseHandler:
 
     def lookUpSpecificDraft(self, draftID):
         """
-        Looks up a specific message of a user
-        :param userName: userName
-        :param messageID: Unique ID of the message
-        :return: Returns the specific message
+        Looks up a specific draft of a user
+        :param draftID: Unique draft ID o
+        :return: Returns the specific draft
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
@@ -330,7 +330,7 @@ class dataBaseHandler:
     def editMessage(self, messageID, editVal):
         """
 
-        :param messageID: THe unique draft ID
+        :param messageID: THe unique message ID
         :return: The edited item
         """
         conn = sqlite3.connect('APP.db')
@@ -345,7 +345,6 @@ class dataBaseHandler:
     def deleteMessage(self, messageID):
         """
         Deletes a message
-        :param userName: userName
         :param messageID: Unique message ID
         :return: the deleted item
         """
@@ -375,7 +374,6 @@ class dataBaseHandler:
 
 
     def displayTableMessages(self):
-        """Display the table"""
         """
         Displays all the messages
         :return: null
@@ -389,7 +387,6 @@ class dataBaseHandler:
         return item
 
     def displayTableMessageRatings(self):
-        """Display the table"""
         """
         Displays all the message ratings.
         :return: null
@@ -403,6 +400,11 @@ class dataBaseHandler:
         return item
 
     def getLikeList(self, message_ID):
+        """
+
+        :param message_ID: the message ID of the specific message
+        :return: The Likelist of the message
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("SELECT likeList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
@@ -412,6 +414,12 @@ class dataBaseHandler:
         return item
     
     def setLikeList(self, message_ID, data):
+        """
+
+        :param message_ID: The specific message id of the message
+        :param data: The new value to be set
+        :return: null
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("UPDATE messageRatingUserList SET likeList = (?) WHERE message_ID = (?)", (data, message_ID))
@@ -419,6 +427,11 @@ class dataBaseHandler:
         conn.close()
     
     def getDislikeList(self, message_ID):
+        """
+
+        :param message_ID: the message ID of the specific message
+        :return: The dislikelist of the message
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("SELECT dislikeList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
@@ -428,13 +441,24 @@ class dataBaseHandler:
         return item
     
     def setDislikeList(self, message_ID, data):
+        """
+
+        :param message_ID: The specific message id of the message
+        :param data: The new value to be set
+        :return: null
+        """
+
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("UPDATE messageRatingUserList SET dislikeList = (?) WHERE message_ID = (?)", (data, message_ID))
         conn.commit()
         conn.close()
-    
+
     def getQualityList(self, message_ID):
+        """
+        :param message_ID: the message ID of the specific message
+        :return: The quality rating list of the message
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("SELECT qualityList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
@@ -442,8 +466,14 @@ class dataBaseHandler:
         conn.commit()
         conn.close()
         return item
-    
+
     def setQualityList(self, message_ID, data):
+        """
+
+        :param message_ID: The specific message id of the message
+        :param data: The new value to be set
+        :return: null
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("UPDATE messageRatingUserList SET qualityList = (?) WHERE message_ID = (?)", (data, message_ID))
@@ -451,6 +481,10 @@ class dataBaseHandler:
         conn.close()
 
     def getStructureList(self, message_ID):
+        """
+        :param message_ID: the message ID of the specific message
+        :return: The structure rating list of the message
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("SELECT structureList FROM messageRatingUserList WHERE message_ID = (?)", (message_ID, ))
@@ -458,15 +492,26 @@ class dataBaseHandler:
         conn.commit()
         conn.close()
         return item
-    
+
     def setStructureList(self, message_ID, data):
+        """
+
+        :param message_ID: The specific message id of the message
+        :param data: The new value to be set
+        :return: null
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("UPDATE messageRatingUserList SET structureList = (?) WHERE message_ID = (?)", (data, message_ID))
         conn.commit()
         conn.close()
-    
+
     def getUserID(self, username):
+        """
+
+        :param username: The username of the user
+        :return: The user ID of the user with the username
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("SELECT username FROM users WHERE userName = (?)", (username, ))
@@ -476,6 +521,12 @@ class dataBaseHandler:
         return item
 
     def getPassword(self, userID):
+        """
+
+        :param userID: The userID of the user whose password is requrired
+        :return: The password
+        """
+
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("SELECT password FROM users WHERE user_ID = (?)", (userID, ))
@@ -485,6 +536,12 @@ class dataBaseHandler:
         return item
 
     def setPassword(self, username, password):
+        """
+
+        :param username: The username of the user
+        :param password: The new password
+        :return: null
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("UPDATE users SET password = (?) WHERE userName = (?)", (password, username))
@@ -492,6 +549,12 @@ class dataBaseHandler:
         conn.close()
 
     def setUsername(self, username, userID):
+        """
+
+        :param username: The new username
+        :param userID: The userID of the user
+        :return: null
+        """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
         c.execute("UPDATE users SET userName = (?) WHERE user_ID = (?)", (username, userID))
