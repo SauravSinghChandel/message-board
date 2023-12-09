@@ -6,10 +6,7 @@ newHandle = dataBaseHandler()
 # newHandle.addUser((3, "LickLider", "liderLick"))
 # newHandle.addUser((4, "Edwin Van Der Sar", "flyingdutchman"))
 
-# user = newHandle.lookUpUserName("Edwin Van Der Sar")
-# print(user)
-# print()
-# print(newHandle.displayTableUsers())
+
 
 """
 USERS:
@@ -21,22 +18,29 @@ USERS:
 
 """
 
-# newHandle.addMessage(("21-02-2023 17:42", "JamesBond", "Vodka Martini, Shaken, not Stirred.", "1"))
-# newHandle.addMessage(("21-02-2023 17:44", "LickLider", "Might invent something else today.", "1"))
-# newHandle.addMessage(("21-02-2023 17:49", "JamesBond", "WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", "2"))
-# newHandle.addMessage(("21-02-2023 17:53", "twainyMark", "If you tell the truth, you don't have to remember anything.", "1"))
-# newHandle.addMessage(("21-02-2023 18:00", "JamesBond", "OW :(", "3"))
-# newHandle.addMessage(("21-02-2023 18:08", "LickLider", "Nice", "2"))
+# newHandle.addMessage(("21-02-2023 17:42", "JamesBond","random" ,"Vodka Martini, Shaken, not Stirred.", "1"))
+
+
+
+# newHandle.addMessage(("21-02-2023 17:44", "LickLider","random" ,"Might invent something else today.", "1"))
+
+# newHandle.addMessage(("21-02-2023 17:49", "JamesBond","random" ,"WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", "2"))
+
+# newHandle.addMessage(("21-02-2023 17:53", "twainyMark", "random","If you tell the truth, you don't have to remember anything.", "1"))
+
+# newHandle.addMessage(("21-02-2023 18:00", "JamesBond","random" ,"OW :(", "3"))
+
+# newHandle.addMessage(("21-02-2023 18:08", "LickLider","random" ,"Nice", "2"))
 
 """
 MESSAGES:
 
 ('21-02-2023 17:42', 'JamesBond', 'Vodka Martini, Shaken, not Stirred.', 1)
-('21-02-2023 17:44', 'LickLider', 'Might invent something else today.', 1)
-('21-02-2023 17:49', 'JamesBond', 'WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', 2)
-('21-02-2023 17:53', 'twainyMark', "If you tell the truth, you don't have to remember anything.", 1)
-('21-02-2023 18:00', 'JamesBond', 'OW :(', 3)
-('21-02-2023 18:08', 'LickLider', 'Nice', 2)
+# ('21-02-2023 17:44', 'LickLider', 'Might invent something else today.', 1)
+# ('21-02-2023 17:49', 'JamesBond', 'WHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', 2)
+# ('21-02-2023 17:53', 'twainyMark', "If you tell the truth, you don't have to remember anything.", 1)
+# ('21-02-2023 18:00', 'JamesBond', 'OW :(', 3)
+# ('21-02-2023 18:08', 'LickLider', 'Nice', 2)
 """
 
 # print(newHandle.displayTableMessages())
@@ -52,12 +56,29 @@ print("Users Entries:")
 print(newHandle.displayTableUsers())
 print("Message Table Entries:")
 print(newHandle.displayTableMessages())
+newHandle.editMessage("1", "Vodka Martini, Shaken, and stirred")
+print(newHandle.displayTableMessages())
+newHandle.editMessage("1", "Vodka Martini, Shaken, not Stirred")
 print("Ratings Data:")
 print(newHandle.displayTableMessageRatings())
-newHandle.updateMessageRating('JamesBond', '1', '7', '7', '7', '7')
+newHandle.updateMessageRating('1', 'MarkTwain', '7','7', '1', '0')
+newHandle.updateMessageRating('1', 'JamesBond', '10','10', '0', '1')
 print("Ratings Data:")
 print(newHandle.displayTableMessageRatings())
 print("Search Data:")
 print(newHandle.lookUpSpecificSubstring("StIrReD"))
 print("Specific Rating Data:")
+
+print(newHandle.getSpecificMessageRatings("1"))
+newHandle.saveDraft(("21-02-2023 17:44", "LickLider","random" ,"Might invent something else today.", "1"))
+print(newHandle.lookUpSpecificDraft("1"))
+newHandle.editDraft("1", "Might not invent something else today")
+print(newHandle.lookUpSpecificDraft("1"))
+newHandle.deleteDraft("1")
+print(newHandle.lookUpSpecificDraft("1"))
+
+
+
+
 print(newHandle.getSpecificMessageRatings("twainyMark", "1"))
+
