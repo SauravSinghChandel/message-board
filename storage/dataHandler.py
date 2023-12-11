@@ -1,6 +1,6 @@
 ##Handles all the database operations
 import sqlite3
-
+import ast
 
 conn = sqlite3.connect("APP.db")
 c = conn.cursor()
@@ -21,13 +21,23 @@ c.execute(f"""CREATE TABLE IF NOT EXISTS messages(
 c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingData(
             userName varchar(255) NOT NULL,
             message_ID int NOT NULL,
-            structure int NOT NULL,
-            quality int NOT NULL,
-            likeStat int NOT NULL,
-            dislikeStat int NOT NULL,
+            structure blob,
+            quality blob,
+            likeStat blob,
+            dislikeStat blob,
             FOREIGN KEY(userName) REFERENCES users(userName)
             FOREIGN KEY(message_ID) REFERENCES messages(message_ID)
             )""")
+
+c.execute(f"""CREATE TABLE IF NOT EXISTS messageDrafts(
+            date varChar(255) NOT NULL,
+            userName varchar(255) NOT NULL,
+            topic varchar(255) NOT NULL,
+            draft varchar(255) NOT NULL,
+            draft_ID int NOT NULL,
+            FOREIGN KEY(userName) REFERENCES users(userName)
+            )""")
+
 c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingUserList(
             message_ID int NOT NULL,
             likeList str DEFAULT "[]",
@@ -38,6 +48,7 @@ c.execute(f"""CREATE TABLE IF NOT EXISTS messageRatingUserList(
             FOREIGN KEY(message_ID) REFERENCES messages(message_ID)
             )"""
         )
+
 conn.commit()
 conn.close()
 
@@ -166,11 +177,12 @@ class dataBaseHandler:
         self._messageItems.append(new_item)
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("INSERT INTO messages VALUES (?,?,?,?, ?)", (new_item[0], new_item[1], new_item[2], new_item[3], new_item[4]))
-        #Adding initial ratings, like and dislike counts.
-        #The rating system is assumed to be from 0 to 10, so averages are added.
-        #Initial like and dislike counts are set to 0.
-        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)",(new_item[1],new_item[4], "0", "0", "0", "0"))
+        c.execute("INSERT INTO messages VALUES (?,?,?,?, ?)",
+                  (new_item[0], new_item[1], new_item[2], new_item[3], new_item[4]))
+        # Adding initial ratings, like and dislike counts.
+        # The rating system is assumed to be from 0 to 10, so averages are added.
+        # Initial like and dislike counts are set to 0.
+        c.execute("INSERT INTO messageRatingData VALUES (?,?,?,?,?,?)", (new_item[1], new_item[4], "0", "0", "0", "0"))
         c.execute("INSERT INTO messageRatingUserList VALUES (?, ?, ?, ?, ?)", (new_item[4], "[]", "[]", "[]", "[]"))
         conn.commit()
         conn.close()
@@ -189,7 +201,7 @@ class dataBaseHandler:
         conn.close()
         return item
 
-    def lookUpSpecificMessage(self, userName, messageID):
+    def lookUpSpecificMessage(self, messageID):
         """
         Looks up a specific message of a user
         :param userName: userName
@@ -198,7 +210,7 @@ class dataBaseHandler:
         """
         conn = sqlite3.connect('APP.db')
         c = conn.cursor()
-        c.execute("SELECT * from messages WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+        c.execute("SELECT * from messages WHERE message_ID = (?)", (messageID,))
         item = c.fetchall()
         conn.commit()
         conn.close()
@@ -218,11 +230,12 @@ class dataBaseHandler:
         conn.close()
         matches = []
         for i in item:
-            index = i[2].lower().find(s.lower())
+            index = i[3].lower().find(s.lower())
             if index != -1:
                 matchItem = i
                 matches.append(matchItem)
         return matches
+
 
     def updateMessageRating(self, messageID, structure, quality, likeStat, dislikeStat):
         """
@@ -258,8 +271,30 @@ class dataBaseHandler:
         conn.close()
         return returnTuple
 
+    def saveDraft(self, new_item):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO messageDrafts VALUES (?,?,?,?,?)",
+                  (new_item[0], new_item[1], new_item[2], new_item[3], new_item[4]))
 
-    def deleteMessage(self, userName, messageID):
+        conn.commit()
+        conn.close()
+
+    def editDraft(self, draftID, editVal):
+        """
+
+        :param draftID: THe unique draft ID
+        :return: The deleted item
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messageDrafts SET draft = (?) WHERE draft_ID = (?)", (editVal, draftID))
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
+    def deleteDraft(self, draftID):
         """
         Deletes a message
         :param userName: userName
@@ -269,7 +304,55 @@ class dataBaseHandler:
         try:
             conn = sqlite3.connect('APP.db')
             c = conn.cursor()
-            c.execute("DELETE from messages WHERE userName = (?) AND message_ID = (?)", (userName, messageID))
+            c.execute("DELETE from messageDrafts WHERE draft_ID = (?)", (draftID,))
+            item = c.fetchall()
+            conn.commit()
+            conn.close()
+            return item
+        except IndexError:
+            print("Does not exist")
+
+    def lookUpSpecificDraft(self, draftID):
+        """
+        Looks up a specific message of a user
+        :param userName: userName
+        :param messageID: Unique ID of the message
+        :return: Returns the specific message
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT * from messageDrafts WHERE draft_ID = (?)", (draftID,))
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
+    def editMessage(self, messageID, editVal):
+        """
+
+        :param messageID: THe unique draft ID
+        :return: The edited item
+        """
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE messages SET message = (?) WHERE message_ID = (?)", (editVal, messageID))
+        item = c.fetchall()
+        conn.commit()
+        conn.close()
+        return item
+
+
+    def deleteMessage(self, messageID):
+        """
+        Deletes a message
+        :param userName: userName
+        :param messageID: Unique message ID
+        :return: the deleted item
+        """
+        try:
+            conn = sqlite3.connect('APP.db')
+            c = conn.cursor()
+            c.execute("DELETE from messages WHERE message_ID = (?)", (messageID,))
             c.execute("DELETE from messageRatingData WHERE message_ID = (?)", (messageID,))
             item = c.fetchall()
             conn.commit()
@@ -382,3 +465,36 @@ class dataBaseHandler:
         c.execute("UPDATE messageRatingUserList SET structureList = (?) WHERE message_ID = (?)", (data, message_ID))
         conn.commit()
         conn.close()
+    
+    def getUserID(self, username):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT username FROM users WHERE userName = (?)", (username, ))
+        item = c.fetchone()[0]
+        conn.commit()
+        conn.close()
+        return item
+
+    def getPassword(self, userID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("SELECT password FROM users WHERE user_ID = (?)", (userID, ))
+        item = c.fetchone()[0]
+        conn.commit()
+        conn.close()
+        return item
+
+    def setPassword(self, username, password):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE users SET password = (?) WHERE userName = (?)", (password, username))
+        conn.commit()
+        conn.close()
+
+    def setUsername(self, username, userID):
+        conn = sqlite3.connect('APP.db')
+        c = conn.cursor()
+        c.execute("UPDATE users SET userName = (?) WHERE user_ID = (?)", (username, userID))
+        conn.commit()
+        conn.close()
+

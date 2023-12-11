@@ -143,6 +143,7 @@ def post_formatter(data: dict) -> str:
                 <input type="range" id="quality" name="quality" min="1" max="5">
                 <button type="submit">Rate Quality</button>
                 </form>
+            </div>
         </div>
     </div>
 
