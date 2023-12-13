@@ -7,6 +7,7 @@
 * Added functionality to change usernames and passwords
 * Added some functionality to save drafts, not fully implemented
 * Added some functionality to edit posts, not fully implemented
+
 #### Status after Sprint 2:
 
 ##### Updates:
@@ -31,19 +32,28 @@
 ### Starting the app 
 
 Running the main.py file should get the app started. Requirements need to be installed.
+### Root (\\)
+- main.py to start the project
+- README.md
+- requirement.txt - The requirements file
 ### The Docs folder
 ##### Contains: 
 - Component Architecture - Contains individual component details
+- hypotheticals - Contains individual hypothetical files
+- Microservices Architecture - Contains the microservice architecture diagrams.
 - performance_reviews/ - Contains all the performance reviews done by everyone.
 - user_stories/ - Contains all the user stories
 - meetingNotes.md - Contains the meeting notes.
 - applogic.md - Contains the applogic. Used only as a reference.
 - Process Analysis - Goes over how decisions were made.
 - UML - Contains the UML Diagrams.
+
 ## The Architecture 
 
+The architecture document is stored in the UML folder. Image may not load due to size. It is linked to 
+[here. (Full_Project_Sprint_3.png)](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/UML)
 
-![](docs/UML/Full_Project_Sprint_2.png)
+![](docs/UML/Full_Project_Sprint_3.png)
 
 - **Server - Gurleen**
 - **logic - Rishi**
@@ -76,15 +86,21 @@ and individual branches are given in the following table below.
 
 ### HTML_Templates
 ##### Contains:
-- Templates/ - Contains home_page.py, login_page.py and sign_in.py which manipulates html code and returns them as templates
+- Templates/ - Contains home_page.py, login_page.py and sign_in.py which manipulates html code and returns them as templates. Also contains
+ch_password_page and ch_uname_page.py which contains the change password and change username files. The search_page.py contains the search page.
 
 ### logic
 ##### Contains:
-- post.py Handles the post fetching, adding and display logic
+- post.py - Handles the post fetching, adding and display logic
+- ratings.py - Handles the rating functionality
+- search.py - Handles the searching functionality
 ### server
 ##### Contains:
 - Server.py - Contains the implementation for the server runs server and maintains routes
-- serverData
+- Contains other test files
+
+### Session data
+- Contains files for storing session data
 ### storage
 ##### Contains:
 
@@ -98,11 +114,13 @@ and individual branches are given in the following table below.
 - login.py - login logic
 - session_check.py - checks if the user is logged in
 - signin.py - adds user to the database and verifies their username
+- test_user_logic.py - Test file
+- ch_pass.py and ch_uname.py - Responsible for changing the username and password
 
 
 ## Architecture Details
 
-Architecture details can be found [here.](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/Component%20Architecture)
+Architecture details for individual parts can be found [here.](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/Component%20Architecture)
 
 ## Issue board
 
@@ -113,7 +131,7 @@ It is liked to [here.](https://github.com/CS2005F23/term-project-teamj/issues)
 ## Hypotheticals
 
 A hypotheticals folder was created to hold all individual 
-hypothetical documents. It is linked to [here.]()
+hypothetical documents. It is linked to [here.](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/hypotheticals)
 
 
 ## Code Reviews
