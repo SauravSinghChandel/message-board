@@ -343,4 +343,202 @@ Agenda for the meeting
 * We weren't clear about updating new features as issues in the kanban board before we decided our process, so we uploaded the cards for sprint 2. 
 * From sprint 3 we will make the change to adding everything as issues.
 
+# Sprint 3
+
+## November 16
+
+* Recorded by: Baasil
+* Date: Nov 16th, 2023
+* Venue: Discord
+* Scrum master: Cameron
+* Time: 9:00 PM - 9:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Agenda items
+* Discussing sprint 3 requirements
+* Figure out a deadline to finish the in progress items.
+
+New documents needed:
+
+* Document that analyzes the micro architecture of the project
+* Project requirement specification
+
+Tasks that needs to be done for the sprint:
+
+* Choosing 3 items from the backlog/new items in addition to finishing the incomplete tasks in sprint 2 (the ratings system)
+* Added items to the kanban board to reflect the new documentation requirements
+
+General announcements:
+
+* Ensure that the code works before pushing 
+* Wait until sprint 2 results to see how we did before requesting grade shift.
+* Monday the deadline for the ratings system.
+* Code review also scheduled on Monday
+
+Changes that need to be made:
+
+* Database: A way to keep track of what user liked which specific message. Some way to avoid duplicate likes or ratings.
+
+* Server: Find how to append the message id to the URL. Tell the database what message a user is interacting with. Make the URL have the message ID. (Avoid the need to hard code buttons)
+
+* User logic: check if the user has already liked the message.
+
+* HTML/frontend:  Way to differentiate whether if a message is already liked or not.
+
+Next meeting: Nov 17 (Friday)
+Time: 10 PM
+
+## November 17th 2023
+* Recorded by: Cameron
+* Date: Nov 17th, 2023
+* Venue: Discord
+* Scrum master: Baasil
+* Time: 10:00 PM - 10:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Agenda for the meeting
+
+* Discuss what we are to do for sprint 3
+* Clear up roles for the 2 new parts
+* Discuss the roles for the backlogged tasks from Sprint 2
+
+Update:
+
+* Baasil will look at using JSON files for storage
+* Discussing how to most efficiently implement the rate and like functions and assigning the user to their likes/ratings
+* Look at template engine for scripts
+
+## November 20th
+
+* Recorded by: Saurav
+* Date: Nov 20th, 2023
+* Venue: Discord
+* Scrum master: Gurleen
+* Time: 9:00 PM - 9:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Agenda: 
+* Code Review, Finishing Backlog, Discussing future features
+
+Updates:
+
+* No code was pushed in the app logic part by Rishi, so Saurav will finish it
+* Code review was done for the additions in the Database module can be found in
+   pull request #56
+* Implementing new edit message feature, can be found in progress board
+* Deadline for this task is 24th Nov 2023, Friday 
+
+## November 24th
+
+* Recorded by: Cameron
+* Date: Nov 24th, 2023
+* Venue: Discord
+* Scrum master: Rishi
+* Time: 10:00 PM - 10:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+
+Agenda for the meeting
+
+* Discuss current progress on task submissions
+
+Updates: 
+
+* Pushing back the due date for all the task submissions by 2 days to Sunday the 26th due to schedule issues.
+* We will transfer grades from Sprint 1 to Sprint 3
+* Prioritize edit functions
+
+## November 27th
+
+* Recorded by: Gurleen
+* Date: Nov 27th, 2023
+* Venue: Discord
+* Scrum master: Saurav
+* Time: 8:00 PM - 8:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Agenda- 
+* Discussing Progress on rating and making further modifications and deadlines
+
+Updates:
+
+* Saurav – code review done; Change list to dict 
+
+* Baasil – Pushed code with editing function.
+
+* Rishi – Not working code. 
+
+* Cameron- noticed inconsistencies. Fixed visual stuff.
+
+* Code review done for Saurav’s pull request
+
+* Next step: User’s being able to save drafts of their posts and edit their posts
+* Separate table for drafts, 
+* save as draft, everything is the same
+* Make separate function for saving a draft
+* Separate webpage for drafts
+* Edit a draft and option to post and save as a draft
+
+* Same code with modifications for drafts 
+
+* Focus on editing and drafts
+* Due Thursday 30th Nov 
+
+## November 29th
+
+* Recorded by: Baasil
+* Date: Nov 29th, 2023
+* Venue: Discord
+* Scrum master: Cameron
+* Time: 8:00 PM - 8:30 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Agenda: 
+* Doing code review for change username and change password feature.
+
+Assigning tasks and task completion details:
+* Saurav did the ratings logic instead of Rishi. 
+
+General announcement: 
+* Post non workable code in the code dump channel.
+
+Task Assignment:
+* Baasil: Complete database changes required for message drafts.
+* Gurleen: Look into creating POST methods for the draft and make sure that the new methods are updated.
+* Cameron: Work on buttons and encapsulate in a new form with respective targets.
+* Saurav: Fixing the bug in the ratings system and adding change username and password features.
+* Rishi: Look into using database methods.
+
+## December 4th
+
+* Recorded by: Rishi
+* Date: Dec 4th, 2023
+* Venue: Discord
+* Scrum master: Cameron
+* Time: 8:00 PM - 9:00 PM
+* Attendance: Saurav, Baasil, Gurleen, Cameron, Rishi
+
+Meeting notes 04 December 2023
+Recorded by: Rishi
+SCRUM master: Cameron
+Venue: Discord
+Time: 8:00 PM - 9:00 PM
+Attendance: Gurleen, Baasil, Saurav, Cameron, Rishi
+
+Agenda- 
+* Discussing progress on rating & finalizing code for final submission
+
+Updates: 
+
+* Saurav - did a quick explanation of the overall working of the code
+
+* Cameron - make the html for the sav draft page
+
+* Rishi - make functions to call save, edit and delete from database
+
+* Gurleen - decide on using URL names
+
+Next step: 
+* start administrative tasks, create UML diagrams
+
 
