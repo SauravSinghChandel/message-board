@@ -1,6 +1,12 @@
 # Term Project - Team J
 ***
 ## Project Status 
+#### Status after Sprint 3:
+##### Updates
+* Fixed the ratings functionality from sprint 2
+* Added functionality to change usernames and passwords
+* Added some functionality to save drafts, not fully implemented
+* Added some functionality to edit posts, not fully implemented
 #### Status after Sprint 2:
 
 ##### Updates:
@@ -24,11 +30,11 @@
 ## Project details
 ### Starting the app 
 
-Running the main.py file should get the app started. Fernet needs to be installed.
+Running the main.py file should get the app started. Requirements need to be installed.
 ### The Docs folder
 ##### Contains: 
 - Component Architecture - Contains individual component details
-- performance_reviews/ Sprint_2- Contains all the performance reviews done by everyone.
+- performance_reviews/ - Contains all the performance reviews done by everyone.
 - user_stories/ - Contains all the user stories
 - meetingNotes.md - Contains the meeting notes.
 - applogic.md - Contains the applogic. Used only as a reference.
@@ -98,7 +104,27 @@ and individual branches are given in the following table below.
 
 Architecture details can be found [here.](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/Component%20Architecture)
 
+## Issue board
+
+An issue board was created to effectively track and 
+solve issues raised during team meetings and code reviews.
+It is liked to [here.](https://github.com/CS2005F23/term-project-teamj/issues)
+
+## Hypotheticals
+
+A hypotheticals folder was created to hold all individual 
+hypothetical documents. It is linked to [here.]()
+
+
 ## Code Reviews
+#### Sprint 3 code reviews:
+* Code reviews were done on github in the form of pull request feedbacks.
+* Pull request number: (#62, #63, #65, #68)
+* [#62](https://github.com/CS2005F23/term-project-teamj/pull/62)
+* [#63](https://github.com/CS2005F23/term-project-teamj/pull/63)
+* [#65](https://github.com/CS2005F23/term-project-teamj/pull/65)
+* [#68](https://github.com/CS2005F23/term-project-teamj/pull/68)
+#### Sprint 2 code reviews:
 * Code reviews were done on github in the form of Pull request feedbacks.
 * Pull request number: (#24, #25, #26, #29, #32, #33, #34, #35, #36, #39, #40, #41)
 * [#24](https://github.com/CS2005F23/term-project-teamj/pull/24)
