@@ -1,0 +1,6 @@
+| Teammate | Performance Review                       | Comments                                                                                                                                                                            |
+|----------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cameron  | - Precise <br/> - Reliable | - Excellent HTML and CSS skils </br> - Took initiative and was innovative with design                                                                           |
+| Gurleen  | - Collaborative <br/> - Initiative          | - Completed coding tasks on time and accurately </br> - Handled admin tasks and formatting perfectly|
+| Rishi    | - Thorough  <br/> - Poor Work Ethic       | - Lack of input and participation in team meetings. </br> - No coding task was finished and team had to pitch in to cover up        |
+| Baasil   | - Impressive work ethic <br/> - Consistent | - Baasil met project deadlines and delivered high-quality code. </br> - Covered up for the admin task and was available after hours to help with any bugs or problems
