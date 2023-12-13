@@ -8,4 +8,4 @@
 
 #### Diagram:
 
-![](../UML/storageUML.png)
+![](../UML/Sprint3StorageUML.png)
