@@ -53,7 +53,7 @@ Running the main.py file should get the app started. Requirements need to be ins
 The architecture document is stored in the UML folder. Image may not load due to size. It is linked to 
 [here. (Full_Project_Sprint_3.png)](https://github.com/CS2005F23/term-project-teamj/tree/master/docs/UML)
 
-![](docs/UML/Full_Project_Sprint_3.png)
+![](docs/UML/Full_Project_Sprint_3.svg)
 
 - **Server - Gurleen**
 - **logic - Rishi**
