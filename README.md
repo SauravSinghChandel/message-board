@@ -2,6 +2,11 @@
 ***
 ## Project Status 
 #### Status after Sprint 3:
+##### Updates
+* Fixed the ratings functionality from sprint 2
+* Added functionality to change usernames and passwords
+* Added some functionality to save drafts, not fully implemented
+* Added some functionality to edit posts, not fully implemented
 #### Status after Sprint 2:
 
 ##### Updates:
@@ -25,11 +30,11 @@
 ## Project details
 ### Starting the app 
 
-Running the main.py file should get the app started. Fernet needs to be installed.
+Running the main.py file should get the app started. Requirements need to be installed.
 ### The Docs folder
 ##### Contains: 
 - Component Architecture - Contains individual component details
-- performance_reviews/ Sprint_2- Contains all the performance reviews done by everyone.
+- performance_reviews/ - Contains all the performance reviews done by everyone.
 - user_stories/ - Contains all the user stories
 - meetingNotes.md - Contains the meeting notes.
 - applogic.md - Contains the applogic. Used only as a reference.
