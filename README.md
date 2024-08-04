@@ -1,3 +1,8 @@
+******************************************************************************************************************************************************************************
+# Note: 
+As part of a collaborative university course project, our team of five developed a basic message board application using Python.  This project involved the entire software development lifecycle, from initial planning and design to implementation and testing. We embraced the Agile methodology, utilizing regular meetings, sprint planning, and thorough documentation to simulate a real-world software engineering environment. My contributions included [specific coding tasks or areas of focus] and actively participating in team discussions and decision-making processes.  This experience allowed me to not only hone my Python programming skills but also to gain valuable insights into collaborative software development and Agile practices.
+******************************************************************************************************************************************************************************
+
 # Term Project - Team J
 ***
 ## Project Status 
